@@ -1,0 +1,304 @@
+WEBVTT
+
+00:00:01.000 --> 00:00:04.200
+<v Maya>Alright everyone, let's get started. I know we're all busy so I'll keep this tight.
+
+00:00:04.500 --> 00:00:08.800
+<v Maya>I pulled the numbers from last week and honestly, I'm a little freaked out.
+
+00:00:09.100 --> 00:00:14.500
+<v Maya>We did fourteen hundred tickets last week. Fourteen hundred. That's up almost twenty percent from the month before.
+
+00:00:14.800 --> 00:00:17.200
+<v Sam>Wait, fourteen hundred? Are you sure that's right?
+
+00:00:17.200 --> 00:00:20.600
+<v Maya>Dead sure. I triple-checked. And our average handle time is like twenty-two minutes per ticket.
+
+00:00:20.900 --> 00:00:24.400
+<v Devon>Yeah, and that's the ones we actually get to. The backlog is just growing.
+
+00:00:24.700 --> 00:00:29.500
+<v Maya>Right. So if you do the math, we're spending over five hundred hours a week just on tickets. With six agents.
+
+00:00:29.800 --> 00:00:33.600
+<v Sam>That's... not sustainable. What are we thinking in terms of solutions?
+
+00:00:34.000 --> 00:00:38.800
+<v Devon>I mean, the obvious one is we need more people. Can we hire like three more agents? That would at least stop the bleeding.
+
+00:00:39.200 --> 00:00:43.500
+<v Sam>Each agent costs us about sixty-five K fully loaded. So that's almost two hundred K for three.
+
+00:00:43.800 --> 00:00:46.300
+<v Sam>I'm not saying no, but we need to think about whether that's the best use of the budget.
+
+00:00:46.600 --> 00:00:49.800
+<v Alex>Wait, can I ask something maybe obvious? Do we know what people are actually emailing us about?
+
+00:00:50.100 --> 00:00:53.200
+<v Maya>Oh, I can tell you. About thirty percent of tickets are onboarding questions.
+
+00:00:53.200 --> 00:00:55.900
+<v Devon>Easily. "How do I set up my account," "where's the import button" —
+
+00:00:55.900 --> 00:00:58.400
+<v Maya>— "why can't I connect my calendar," yeah. The same five questions over and over.
+
+00:00:58.700 --> 00:01:03.500
+<v Priya>Okay so that's like four hundred tickets a week that probably shouldn't even exist. That's a product problem.
+
+00:01:03.800 --> 00:01:08.600
+<v Priya>Honestly, we should just rip out the broken onboarding flow and rebuild it. That causes like thirty percent of our tickets right there.
+
+00:01:08.900 --> 00:01:12.200
+<v Sam>Rebuild onboarding? That's a quarter-long project minimum. What do we do in the meantime?
+
+00:01:12.500 --> 00:01:17.400
+<v Devon>So here's what I've been thinking. What if we set up auto-responses for the top five ticket types? Like actual templates.
+
+00:01:17.700 --> 00:01:22.800
+<v Devon>Customer writes in about calendar sync, they immediately get a step-by-step reply. No agent has to touch it unless they write back.
+
+00:01:23.100 --> 00:01:26.600
+<v Maya>We tried something like that six months ago and it was terrible. People hated it.
+
+00:01:26.800 --> 00:01:30.300
+<v Devon>Because the templates were bad! They were written by marketing. No offense to marketing.
+
+00:01:30.300 --> 00:01:32.800
+<v Maya>Ha. Fair point.
+
+00:01:33.100 --> 00:01:38.500
+<v Alex>Why don't we just build a help center? Like, put the top twenty articles up and link people there before they even write a ticket?
+
+00:01:38.800 --> 00:01:42.200
+<v Maya>We have a help center. It's just... nobody can find anything in it.
+
+00:01:42.500 --> 00:01:46.300
+<v Priya>That's because the search is broken and the articles are from 2023. Half the screenshots are wrong.
+
+00:01:46.600 --> 00:01:51.800
+<v Alex>Okay but what if we actually made it good? Like a real self-serve help center with the top twenty articles, updated, searchable?
+
+00:01:52.100 --> 00:01:55.600
+<v Sam>I actually think that's reasonable. What would that cost us, Priya?
+
+00:01:55.900 --> 00:01:59.800
+<v Priya>If we use something off-the-shelf, maybe two weeks of eng time plus content writing. Not bad.
+
+00:02:00.100 --> 00:02:04.000
+<v Devon>While we're talking about tooling, can we please talk about the triage situation?
+
+00:02:04.300 --> 00:02:09.600
+<v Devon>Right now I'm literally eyeballing every ticket and deciding priority in my head. There's no system. No dashboard. Nothing.
+
+00:02:09.900 --> 00:02:14.200
+<v Priya>Yeah, I've been wanting to build an internal ticket triage dashboard for a while. Something that shows volume by category, SLA status, who's working what.
+
+00:02:14.500 --> 00:02:17.800
+<v Sam>Is that different from what Zendesk already gives us?
+
+00:02:18.100 --> 00:02:22.500
+<v Priya>Zendesk gives us data. It doesn't give us a view that actually helps us make decisions. There's a difference.
+
+00:02:22.800 --> 00:02:24.800
+<v Devon>She's right. I've been asking for this for months.
+
+00:02:25.100 --> 00:02:29.600
+<v Maya>Okay, I want to come back to something. Devon, you mentioned auto-responses. What about going further than templates?
+
+00:02:29.900 --> 00:02:35.200
+<v Maya>What if we used AI for suggested replies? Like, the agent still sends it, but the AI drafts a response based on the ticket.
+
+00:02:35.500 --> 00:02:38.700
+<v Devon>Oh, like a copilot for support? I've seen demos of that. It could be really good.
+
+00:02:39.000 --> 00:02:43.400
+<v Priya>There are tools that do this. They plug into Zendesk. I can look into what's out there.
+
+00:02:43.700 --> 00:02:47.500
+<v Sam>What's the price range on something like that? Ballpark.
+
+00:02:47.800 --> 00:02:52.200
+<v Priya>Depends. Some charge per-seat, some per-resolution. Probably fifty to a hundred bucks per agent per month.
+
+00:02:52.500 --> 00:02:55.200
+<v Sam>So less than a thousand a month for the team. That's nothing compared to a new hire.
+
+00:02:55.500 --> 00:02:59.000
+<v Alex>Wait, can I ask another dumb question?
+
+00:02:59.000 --> 00:03:00.500
+<v Maya>There are no dumb questions, Alex. Go ahead.
+
+00:03:00.800 --> 00:03:05.200
+<v Alex>Why are we doing everything over email? Like, wouldn't in-app chat be way faster?
+
+00:03:05.500 --> 00:03:09.800
+<v Alex>People wouldn't have to wait hours for a reply. They could just get help right there in the product.
+
+00:03:10.100 --> 00:03:14.600
+<v Devon>I mean, yes, in theory. But that's a huge migration. You're talking about changing the entire support channel.
+
+00:03:14.900 --> 00:03:17.900
+<v Sam>And I'd need to staff for real-time. That's a different model entirely.
+
+00:03:18.200 --> 00:03:22.700
+<v Maya>I don't hate the idea long-term, but we can't do that while we're drowning. That's a next-quarter thing at best.
+
+00:03:23.000 --> 00:03:27.800
+<v Priya>Actually, one thing that might help right now — what if we tag tickets by root cause?
+
+00:03:28.100 --> 00:03:33.500
+<v Priya>Like systematically. Not just "billing" or "bug" but the actual root cause. Then we can see patterns and fix things upstream.
+
+00:03:33.800 --> 00:03:37.600
+<v Devon>We kind of do that already, but it's inconsistent. Everyone tags differently.
+
+00:03:37.900 --> 00:03:42.100
+<v Priya>Right, so we standardize the taxonomy. Maybe ten to fifteen root-cause categories. Make it required.
+
+00:03:42.400 --> 00:03:46.500
+<v Maya>I like that. Because then we can actually go to product and say "hey, this specific thing causes two hundred tickets a week, fix it."
+
+00:03:46.800 --> 00:03:49.000
+<v Sam>Data-driven. I like it. That's how we get engineering to listen.
+
+00:03:49.300 --> 00:03:53.600
+<v Devon>Oh! Speaking of things that cause a ton of tickets — outages. Every time something goes down, we get slammed.
+
+00:03:53.900 --> 00:03:58.500
+<v Devon>People literally email us to ask if the site is down. While the site is down. It's chaos.
+
+00:03:58.800 --> 00:04:02.400
+<v Alex>Don't we have a status page?
+
+00:04:02.700 --> 00:04:05.200
+<v Maya>No.
+
+00:04:05.200 --> 00:04:06.500
+<v Alex>Oh.
+
+00:04:06.800 --> 00:04:11.600
+<v Maya>Yeah. We've been asking for one forever. A status page would kill probably ten percent of tickets during incidents.
+
+00:04:11.900 --> 00:04:16.000
+<v Priya>Statuspage dot io. It's like fifty bucks a month. I can set it up in a day.
+
+00:04:16.300 --> 00:04:18.600
+<v Sam>Sold. That's the easiest win on this list.
+
+00:04:18.900 --> 00:04:22.000
+<v Devon>Oh, while we're talking about things we should have — okay I know this is getting long —
+
+00:04:22.000 --> 00:04:23.800
+<v Maya>No keep going, this is good.
+
+00:04:24.100 --> 00:04:29.600
+<v Devon>What about office hours? Like a weekly live Q-and-A. Customers can jump on, ask questions, we answer them in real time.
+
+00:04:29.900 --> 00:04:33.800
+<v Devon>It deflects tickets and it makes us look like we actually care. Which we do.
+
+00:04:34.100 --> 00:04:37.600
+<v Sam>Who's running that? We don't have extra bandwidth.
+
+00:04:37.900 --> 00:04:41.800
+<v Devon>Rotate it. One agent per week, one hour. That's it. And we record it, post the recording.
+
+00:04:42.100 --> 00:04:44.200
+<v Maya>I actually love that. Low cost, high signal.
+
+00:04:44.500 --> 00:04:48.600
+<v Alex>Plus if people see the recordings they might not even need to come to the live one. It compounds.
+
+00:04:48.900 --> 00:04:50.800
+<v Maya>Look at the new hire with the big ideas.
+
+00:04:51.100 --> 00:04:55.500
+<v Priya>Okay, I want to throw one more thing out there. This is more long-term, but hear me out.
+
+00:04:55.800 --> 00:05:01.800
+<v Priya>What if we built a customer health score? Like a metric that predicts which customers are likely to file tickets before they do.
+
+00:05:02.100 --> 00:05:06.200
+<v Priya>Based on usage patterns, feature adoption, account age. We could do proactive outreach.
+
+00:05:06.500 --> 00:05:09.800
+<v Sam>That sounds like a data science project. Do we have the data for that?
+
+00:05:10.100 --> 00:05:14.200
+<v Priya>We have more than you think. Product analytics, ticket history, billing data. It's all there. Just nobody's connected the dots.
+
+00:05:14.500 --> 00:05:18.700
+<v Devon>I mean, it's cool, but it's not going to help us this month. Or next month.
+
+00:05:19.000 --> 00:05:22.800
+<v Priya>Agreed. I'm just saying it should be on the roadmap. We keep playing defense.
+
+00:05:23.100 --> 00:05:27.800
+<v Maya>That's a good segue actually. Because I think we also need to talk about how the team is structured.
+
+00:05:28.100 --> 00:05:33.600
+<v Maya>Right now everyone handles everything. What if we did a tier-one, tier-two split? Tier one handles the quick stuff, tier two handles the complex stuff.
+
+00:05:33.900 --> 00:05:38.500
+<v Devon>We talked about that last year and nobody wanted to be on tier one. It's soul-crushing to just reset passwords all day.
+
+00:05:38.800 --> 00:05:42.200
+<v Maya>But if we automate the easy stuff, tier one is less soul-crushing. It's more about routing.
+
+00:05:42.500 --> 00:05:45.200
+<v Sam>And it's better for career development. Tier two could be a growth path.
+
+00:05:45.500 --> 00:05:49.300
+<v Alex>Wait, why don't we just automate tier one entirely and then everyone is tier two?
+
+00:05:49.600 --> 00:05:52.800
+<v Devon>Because you can't automate judgment, Alex. Some "easy" tickets are actually complex.
+
+00:05:53.100 --> 00:05:55.600
+<v Alex>Right, okay. Yeah that makes sense.
+
+00:05:55.900 --> 00:06:01.200
+<v Maya>Okay I want to try to land this. We've got a bunch of ideas. Some are quick, some are huge. Let me try to recap.
+
+00:06:01.500 --> 00:06:06.800
+<v Maya>Quick wins: status page, auto-responses for top five ticket types, standardize root-cause tagging.
+
+00:06:07.100 --> 00:06:12.400
+<v Maya>Medium effort: self-serve help center refresh, AI suggested replies, the triage dashboard, office hours.
+
+00:06:12.700 --> 00:06:18.500
+<v Maya>Big bets: rebuild onboarding, move to in-app chat, customer health score, hire three agents, tier-one tier-two reorg.
+
+00:06:18.800 --> 00:06:22.100
+<v Sam>That's a lot. We can't do everything. We need to prioritize.
+
+00:06:22.400 --> 00:06:26.500
+<v Devon>I'd say status page and root-cause tagging are basically free. Just do those.
+
+00:06:26.800 --> 00:06:30.500
+<v Priya>And the AI suggested replies pilot. Low cost, potentially huge impact on handle time.
+
+00:06:30.800 --> 00:06:34.600
+<v Sam>Alright, let's figure out what to actually commit to. Can we get a framework or something?
+
+00:06:34.900 --> 00:06:38.200
+<v Maya>Yeah. Let me pull together the effort and impact for each one and we'll make a call by end of week.
+
+00:06:38.500 --> 00:06:42.500
+<v Maya>But seriously, if we don't do something soon, I'm going to lose people. The team is burnt out.
+
+00:06:42.800 --> 00:06:45.800
+<v Devon>We know. That's why we're all here.
+
+00:06:46.100 --> 00:06:48.800
+<v Sam>We'll figure it out. Good meeting everyone.
+
+00:06:49.100 --> 00:06:51.200
+<v Maya>Thanks team. I'll send out notes by tomorrow.
+
+00:06:51.500 --> 00:06:53.000
+<v Alex>That was really helpful. Thanks everyone.

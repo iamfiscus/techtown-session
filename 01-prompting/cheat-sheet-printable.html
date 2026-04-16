@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting Methods Cheat Sheet | TechTown Start Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c5449;
+            --accent: #ffcc33;
+            --dark: #1a1a1a;
+            --light: #f5f7f9;
+            --gray: #6c757d;
+            --tier1: #0c5449;
+            --tier2: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 7.5pt;
+            line-height: 1.2;
+            color: var(--dark);
+            background: white;
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            padding: 0.2in 0.3in;
+            background: white;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 6px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 5px;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-placeholder {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 8pt;
+        }
+
+        .title-block h1 {
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .title-block .subtitle {
+            font-size: 6.5pt;
+            color: var(--gray);
+        }
+
+        /* Tier badges */
+        .tier-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 7pt;
+            font-weight: 600;
+            color: white;
+            vertical-align: middle;
+        }
+
+        .tier-1 { background: var(--tier1); }
+        .tier-2 { background: var(--tier2); }
+
+        /* Main layout: 2 columns for cards + full-width table */
+        .main-content {
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 6px;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .cards-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            min-height: 0;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-height: 0;
+        }
+
+        /* Section styling */
+        .section {
+            flex: 1;
+            background: var(--light);
+            border-radius: 4px;
+            padding: 6px 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .section.tier2 {
+            border-left-color: var(--tier2);
+        }
+
+        .section h2 {
+            font-size: 9pt;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .section.tier2 h2 {
+            color: var(--tier2);
+        }
+
+        .method-why {
+            font-size: 7.5pt;
+            color: var(--gray);
+            margin-bottom: 3px;
+            font-style: italic;
+        }
+
+        /* Example boxes */
+        .example-box {
+            background: #f0f4f8;
+            border-radius: 2px;
+            padding: 4px 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 7pt;
+            line-height: 1.3;
+            border-left: 2px solid var(--accent);
+        }
+
+        .example-box .good {
+            color: #008833;
+        }
+
+        .example-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 5pt;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 1px;
+        }
+
+        /* Comparison columns */
+        .compare-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            font-size: 7pt;
+        }
+
+        .compare-col {
+            padding: 4px 6px;
+            border-radius: 2px;
+        }
+
+        .compare-col.bad {
+            background: #fff5f5;
+            border: 1px solid #ffcccc;
+        }
+
+        .compare-col.good {
+            background: #f0fff4;
+            border: 1px solid #a3e6b4;
+        }
+
+        .compare-col strong {
+            display: block;
+            font-size: 7pt;
+            margin-bottom: 2px;
+        }
+
+        .compare-col.bad strong { color: #cc0000; }
+        .compare-col.good strong { color: #008833; }
+
+        .note {
+            font-size: 7pt;
+            color: var(--gray);
+            margin-top: 3px;
+        }
+
+        /* Quick Reference Table - Full Width */
+        .ref-section {
+            flex-shrink: 0;
+            background: var(--light);
+            border-radius: 3px;
+            padding: 5px 6px;
+            border: 2px solid var(--primary);
+        }
+
+        .ref-section h2 {
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+
+        .ref-table th {
+            background: var(--primary);
+            color: white;
+            padding: 4px 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 7pt;
+        }
+
+        .ref-table td {
+            padding: 3px 8px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .ref-table tr:nth-child(even) {
+            background: white;
+        }
+
+        .ref-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ref-table code {
+            font-family: 'Courier New', monospace;
+            background: #e8f0f8;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 7pt;
+        }
+
+        /* 3 column layout for table */
+        .ref-table-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .ref-table-grid table {
+            width: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 4px;
+            border-top: 2px solid var(--primary);
+            font-size: 6.5pt;
+            color: var(--primary);
+        }
+
+        .footer .tagline {
+            font-weight: 600;
+        }
+
+        /* Print styles */
+        @media print {
+            html, body {
+                height: 11in;
+                width: 8.5in;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .page {
+                width: 8.5in;
+                height: 11in;
+                padding: 0.2in 0.25in;
+            }
+
+            @page {
+                size: letter;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo-placeholder">TT</div>
+                <div class="title-block">
+                    <h1>Prompting Methods Cheat Sheet</h1>
+                    <div class="subtitle">TechTown Start Studio | 15 Essential Methods for Non-Technical Founders</div>
+                </div>
+            </div>
+            <div style="font-size: 6pt; text-align: right; color: var(--gray);">
+                <span class="tier-badge tier-1">TIER 1</span> Core 5 &nbsp;
+                <span class="tier-badge tier-2">TIER 2</span> Next 10
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Cards in 2 Columns -->
+            <div class="cards-area">
+                <!-- Column 1: Tier 1 Methods 1-5 + Tier 2 Methods 6-7 -->
+                <div class="column">
+                    <div class="section">
+                        <h2><span class="tier-badge tier-1">1</span> Markdown Headers</h2>
+                        <div class="method-why">AI parses structure; forces YOU to organize</div>
+                        <div class="compare-row">
+                            <div class="compare-col bad">
+                                <strong>Bad</strong>
+                                I need a landing page with hero and headline and CTA and features...
+                            </div>
+                            <div class="compare-col good">
+                                <strong>Good</strong>
+                                # Landing Page<br>## Hero Section<br>- Headline: "Ship faster"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2><span class="tier-badge tier-1">2</span> ALL CAPS for Constraints</h2>
+                        <div class="method-why">AI weights emphasized text more heavily</div>
+                        <div class="example-box">
+                            REQUIRED: Email MUST validate | NEVER allow empty fields | ALWAYS show errors
+                        </div>
+                        <div class="note">Warning: Reserve for 2-4 critical items max.</div>
+                    </div>
+
+                    <div class="section">
+                        <h2><span class="tier-badge tier-1">3</span> Constraint Sandwich</h2>
+                        <div class="method-why">Context → Ask → Constraints works every time</div>
+                        <div class="example-box">
+                            ## Context<br>E-commerce, React, 500+ products<br>## Request<br>Add search bar<br>## Constraints<br>MUST debounce, case-insensitive
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2><span class="tier-badge tier-1">4</span> Interview Method</h2>
+                        <div class="method-why">Conversation beats mega-prompts</div>
+                        <div class="compare-row">
+                            <div class="compare-col bad">
+                                <strong>Risky</strong>
+                                Build auth with login, OAuth, reset, sessions, profile...
+                            </div>
+                            <div class="compare-col good">
+                                <strong>Safer</strong>
+                                Turn 1: "Start with login"<br>Turn 2: "Add OAuth"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2><span class="tier-badge tier-1">5</span> Reference + Modify</h2>
+                        <div class="method-why">"Like X but Y" saves 1000 words</div>
+                        <div class="example-box">
+                            Build pricing page <span class="good">like Stripe's</span>, but: 2 tiers, our colors, add FAQ
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">6</span> Numbered Steps</h2>
+                        <div class="method-why">Removes ambiguity about order</div>
+                        <div class="example-box">
+                            1. Shipping form → 2. Order summary → 3. Payment → 4. Success page
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">7</span> Explain Before Fixing</h2>
+                        <div class="method-why">Learn what went wrong, not just get a fix</div>
+                        <div class="example-box">
+                            [error] Before fixing: 1. Explain cause 2. Why in MY code? 3. Then fix
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Tier 2 Methods 8-15 -->
+                <div class="column">
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">8-9</span> Screenshots + Full Errors</h2>
+                        <div class="method-why">Visual > verbal; details matter</div>
+                        <div class="example-box">
+                            <strong>Screenshots:</strong> Mockups, competitor sites, error screens<br>
+                            <strong>Errors:</strong> Copy ENTIRE stack trace + what triggered it
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">10</span> Chunking</h2>
+                        <div class="method-why">One feature per message = fewer errors</div>
+                        <div class="compare-row">
+                            <div class="compare-col bad">
+                                <strong>Too much</strong>
+                                Add auth, dashboard, and dark mode
+                            </div>
+                            <div class="compare-col good">
+                                <strong>Chunked</strong>
+                                Msg 1: auth | Msg 2: dashboard | Msg 3: dark mode
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">11</span> Give Me 3 Options</h2>
+                        <div class="method-why">Forces alternatives, avoids tunnel vision</div>
+                        <div class="example-box">
+                            Give me 3 ways to structure DB. For each: schema, pros/cons, when to use
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">12</span> Comparison Matrix</h2>
+                        <div class="method-why">Side-by-side evaluation reveals tradeoffs</div>
+                        <div class="example-box">
+                            Compare Supabase, Firebase, PlanetScale on: setup, pricing, real-time, free tier
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">13</span> Critique Yourself First</h2>
+                        <div class="method-why">AI knows weaknesses but won't mention unless asked</div>
+                        <div class="example-box">
+                            Before implementing: What weaknesses? Edge cases? What would senior eng push back on?
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">14</span> 5 Whys</h2>
+                        <div class="method-why">Gets to root cause, prevents fixing wrong thing</div>
+                        <div class="example-box">
+                            Page slow → API 3s → Fetching 10k items → No pagination → <span class="good">Fix: add pagination</span>
+                        </div>
+                    </div>
+
+                    <div class="section tier2">
+                        <h2><span class="tier-badge tier-2">15</span> Pre-Mortem</h2>
+                        <div class="method-why">"How could this fail?" overcomes optimism bias</div>
+                        <div class="example-box">
+                            Imagine it failed in 3 months. List 5 causes. What can we do NOW to prevent each?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference Table - Full Width -->
+            <div class="ref-section">
+                <h2>Quick Reference Card</h2>
+                <div class="ref-table-grid">
+                    <table class="ref-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>When</th>
+                            <th>Phrase</th>
+                        </tr>
+                        <tr>
+                            <td>Markdown headers</td>
+                            <td>Always</td>
+                            <td><code># ## ###</code></td>
+                        </tr>
+                        <tr>
+                            <td>ALL CAPS</td>
+                            <td>Critical constraints</td>
+                            <td><code>MUST NEVER</code></td>
+                        </tr>
+                        <tr>
+                            <td>Constraint sandwich</td>
+                            <td>Non-trivial requests</td>
+                            <td>Context→Ask→Limits</td>
+                        </tr>
+                        <tr>
+                            <td>Interview method</td>
+                            <td>Complex features</td>
+                            <td>"Let's start with..."</td>
+                        </tr>
+                        <tr>
+                            <td>Reference + Modify</td>
+                            <td>UI/design work</td>
+                            <td>"Like X but with..."</td>
+                        </tr>
+                    </table>
+                    <table class="ref-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>When</th>
+                            <th>Phrase</th>
+                        </tr>
+                        <tr>
+                            <td>Numbered steps</td>
+                            <td>Sequential processes</td>
+                            <td><code>1. 2. 3.</code></td>
+                        </tr>
+                        <tr>
+                            <td>Explain before fix</td>
+                            <td>Debugging</td>
+                            <td>"Why is this happening?"</td>
+                        </tr>
+                        <tr>
+                            <td>Screenshots</td>
+                            <td>UI work</td>
+                            <td>[attach image]</td>
+                        </tr>
+                        <tr>
+                            <td>Full error paste</td>
+                            <td>Any error</td>
+                            <td>Copy entire trace</td>
+                        </tr>
+                        <tr>
+                            <td>Chunking</td>
+                            <td>Multiple features</td>
+                            <td>One per message</td>
+                        </tr>
+                    </table>
+                    <table class="ref-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>When</th>
+                            <th>Phrase</th>
+                        </tr>
+                        <tr>
+                            <td>Give 3 options</td>
+                            <td>Decisions</td>
+                            <td>"Show 3 ways to..."</td>
+                        </tr>
+                        <tr>
+                            <td>Comparison matrix</td>
+                            <td>Evaluating choices</td>
+                            <td>"Create a table..."</td>
+                        </tr>
+                        <tr>
+                            <td>Critique yourself</td>
+                            <td>Before building</td>
+                            <td>"What's wrong with?"</td>
+                        </tr>
+                        <tr>
+                            <td>5 Whys</td>
+                            <td>Root cause</td>
+                            <td>"Why? Why? Why?"</td>
+                        </tr>
+                        <tr>
+                            <td>Pre-mortem</td>
+                            <td>Risk planning</td>
+                            <td>"How could this fail?"</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span class="tagline">Master these 15 methods before moving to advanced techniques.</span> | TechTown Start Studio | January 2026
+        </footer>
+    </div>
+</body>
+</html>

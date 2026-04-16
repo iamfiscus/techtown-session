@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Engineering for Founders | TechTown Start Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c5449;
+            --accent: #ffcc33;
+            --secondary: #25524a;
+            --light: #f5f5f5;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #0c5449 0%, #25524a 100%);
+            --gradient-accent: linear-gradient(135deg, #ffcc33 0%, #f0b000 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #25524a 100%);
+            --radius: 10px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            padding: 60px 80px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Slide Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .logo-placeholder {
+            width: auto;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+        }
+
+        .section-label {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Slide Content */
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .slide-content.top-aligned {
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            font-weight: 300;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .meta {
+            font-size: 20px;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+
+        /* Lists */
+        ul, ol {
+            font-size: 24px;
+            line-height: 1.8;
+            margin-left: 40px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 15px;
+        }
+
+        ul li::marker {
+            color: var(--accent);
+        }
+
+        ol li::marker {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Emphasis */
+        .highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .big-quote {
+            font-size: 36px;
+            font-style: italic;
+            background: rgba(255, 204, 51, 0.15);
+            border-left: 6px solid var(--accent);
+            padding: 30px 40px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 30px 0;
+        }
+
+        .big-prompt {
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 6px solid var(--accent);
+            padding: 25px 35px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 25px 0;
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.6;
+        }
+
+        /* Code Blocks */
+        pre, code {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-size: 18px;
+            line-height: 1.6;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-block code {
+            color: #e0e0e0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 19px;
+        }
+
+        th {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        th:first-child {
+            border-radius: var(--radius) 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 var(--radius) 0 0;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        tr:last-child td:first-child {
+            border-radius: 0 0 0 var(--radius);
+        }
+
+        tr:last-child td:last-child {
+            border-radius: 0 0 var(--radius) 0;
+        }
+
+        /* Comparison Cards */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-card.bad {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .comparison-card.good {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .comparison-card h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-card.bad h4 {
+            color: #ff6b6b;
+        }
+
+        .comparison-card.good h4 {
+            color: #4ecdc4;
+        }
+
+        .comparison-card .label {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .comparison-card.bad .label {
+            background: #ff6b6b;
+            color: var(--dark);
+        }
+
+        .comparison-card.good .label {
+            background: #4ecdc4;
+            color: var(--dark);
+        }
+
+        .comparison-card .prompt-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 18px;
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .comparison-card .result {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Workflow Diagram */
+        .workflow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .workflow-step {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 25px 35px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .workflow-step .step-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .workflow-step .step-desc {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .workflow-arrow {
+            font-size: 36px;
+            color: var(--accent);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card h4 {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Stats Box */
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: var(--radius);
+        }
+
+        .stat .number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .stat .label {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        /* Context Type Cards */
+        .context-types {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .context-type-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 25px;
+            border-top: 4px solid var(--accent);
+            text-align: center;
+        }
+
+        .context-type-card .type-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .context-type-card .type-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .context-type-card .type-analogy {
+            font-size: 14px;
+            opacity: 0.7;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .context-type-card .type-example {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        /* Operations Grid */
+        .operations-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .operation-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 25px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .operation-card .op-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .operation-card .op-meaning {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .operation-card .op-analogy {
+            font-size: 14px;
+            opacity: 0.7;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .operation-card .op-example {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Attention Budget Chart */
+        .attention-chart {
+            position: relative;
+            height: 250px;
+            margin: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 30px;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .attention-chart .y-label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: rotate(-90deg) translateX(50%);
+            font-size: 14px;
+            opacity: 0.7;
+            white-space: nowrap;
+        }
+
+        .attention-chart .x-label {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            width: 100%;
+            height: 100%;
+            padding-left: 40px;
+            padding-bottom: 30px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            min-width: 8px;
+            transition: height 0.3s ease;
+        }
+
+        /* Tool Map Connector */
+        .tool-map {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .tool-map-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 15px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px 24px;
+            border-radius: var(--radius);
+        }
+
+        .tool-map-row .problem {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .tool-map-row .arrow {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        .tool-map-row .operation {
+            font-size: 14px;
+            background: rgba(255, 204, 51, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-align: center;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .tool-map-row .tool-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* MCP Diagram */
+        .mcp-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .mcp-center {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 30px 40px;
+            border-radius: var(--radius);
+            font-weight: 900;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .mcp-connections {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mcp-tool {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 12px 24px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Decision Tree */
+        .decision-tree {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 20px 0;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 17px;
+            line-height: 2;
+        }
+
+        .decision-tree .branch {
+            margin-left: 30px;
+        }
+
+        .decision-tree .question {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .decision-tree .answer {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Exercise Steps */
+        .exercise-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .exercise-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            border-radius: var(--radius);
+            border-left: 5px solid var(--accent);
+        }
+
+        .exercise-step .step-num {
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 700;
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .exercise-step .step-text {
+            font-size: 20px;
+        }
+
+        .exercise-step .step-hint {
+            font-size: 14px;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Mistake List */
+        .mistake-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .mistake-list li {
+            background: rgba(255, 107, 107, 0.15);
+            border-left: 5px solid #ff6b6b;
+            padding: 20px 30px;
+            margin-bottom: 15px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .mistake-list li strong {
+            color: #ff6b6b;
+        }
+
+        /* Why Box */
+        .why-box {
+            background: rgba(78, 205, 196, 0.15);
+            border-left: 5px solid #4ecdc4;
+            padding: 20px 30px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 20px 0;
+        }
+
+        .why-box h4 {
+            color: #4ecdc4;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .why-box p {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* Speaker Notes (hidden by default) */
+        .speaker-notes {
+            display: none;
+        }
+
+        /* Slide Footer */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+
+        .slide-number {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* Navigation */
+        .nav-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-hint.visible {
+            opacity: 1;
+        }
+
+        /* Title Slide Special */
+        .slide.title-slide {
+            background: var(--gradient-dark);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .slide.title-slide h1 {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        .slide.title-slide .subtitle {
+            font-size: 36px;
+            margin-bottom: 60px;
+        }
+
+        /* Section Divider */
+        .slide.section-divider {
+            background: var(--accent);
+            color: var(--dark);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .slide.section-divider h1 {
+            color: var(--primary);
+        }
+
+        .slide.section-divider p {
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        .slide.section-divider .slide-number {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Screenshot Box */
+        .screenshot-box {
+            background: var(--white);
+            color: var(--dark);
+            border-radius: var(--radius);
+            padding: 50px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            margin: 30px auto;
+            max-width: 900px;
+        }
+
+        .screenshot-box .prompt-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 24px;
+            line-height: 1.8;
+            color: var(--primary);
+        }
+
+        /* Q&A Slide */
+        .qa-slide {
+            text-align: center;
+        }
+
+        .qa-slide h1 {
+            font-size: 120px;
+        }
+
+        /* Thank You Slide */
+        .thankyou-slide {
+            text-align: center;
+        }
+
+        .thankyou-slide h1 {
+            font-size: 72px;
+            margin-bottom: 50px;
+        }
+
+        .tagline {
+            font-size: 32px;
+            font-style: italic;
+            color: var(--accent);
+            margin-top: 50px;
+        }
+
+        /* Tool Feature Card */
+        .tool-feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tool-feature {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .tool-feature .feature-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .tool-feature .feature-desc {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* N8N Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-node {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 14px 20px;
+            font-size: 14px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .flow-node.trigger {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.15);
+        }
+
+        .flow-node.ai {
+            border-color: var(--accent);
+            background: rgba(255, 204, 51, 0.15);
+        }
+
+        .flow-node.action {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .flow-arrow {
+            color: var(--accent);
+            font-size: 24px;
+        }
+
+        /* Case Study Table with icons */
+        .case-stage {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr 100px;
+            gap: 15px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 18px 24px;
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .case-stage .stage-name {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .case-stage .stage-decision {
+            font-size: 16px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .case-stage .stage-tool {
+            font-size: 16px;
+        }
+
+        .case-stage .stage-op {
+            font-size: 13px;
+            background: rgba(255, 204, 51, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-align: center;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Quick Ref Grid */
+        .quick-ref {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .quick-ref-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 25px;
+        }
+
+        .quick-ref-section h4 {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .quick-ref-section .ref-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .quick-ref-section .ref-item:last-child {
+            border-bottom: none;
+        }
+
+        .quick-ref-section .ref-item .ref-tool {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 40px 50px;
+            }
+
+            h1 { font-size: 48px; }
+            h2 { font-size: 36px; }
+            h3 { font-size: 24px; }
+            p, ul, ol { font-size: 20px; }
+
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-diagram {
+                flex-direction: column;
+            }
+
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .context-types, .operations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 30px; }
+            h1 { font-size: 36px; }
+            h2 { font-size: 28px; }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-box {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .context-types, .operations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+
+        <!-- ============================================== -->
+        <!-- SLIDE 1: Title Slide -->
+        <!-- ============================================== -->
+        <div class="slide title-slide active" data-slide="1">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Start Studio Workshop</span>
+            </div>
+            <div class="slide-content">
+                <h1>Context Engineering,<br>Tooling & MCP</h1>
+                <p class="subtitle">Making AI Smarter Before It Talks</p>
+                <p class="meta">JD Fiscus | TechTown Start Studio | February 2026</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">1 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SLIDE 2: Light Callback -->
+        <!-- ============================================== -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Callback</span>
+            </div>
+            <div class="slide-content">
+                <h2>From Prompting to Context</h2>
+                <div class="comparison-container">
+                    <div class="comparison-card">
+                        <h4>Session 1</h4>
+                        <p style="font-size: 22px; margin-bottom: 0;">How to <span class="highlight">talk</span> to AI</p>
+                        <p style="font-size: 16px; opacity: 0.7; margin-bottom: 0;">Prompting methods, structure, techniques</p>
+                    </div>
+                    <div class="comparison-card" style="border-color: var(--accent);">
+                        <h4 style="color: var(--accent);">Session 2</h4>
+                        <p style="font-size: 22px; margin-bottom: 0;">How to make AI <span class="highlight">smarter before it talks</span></p>
+                        <p style="font-size: 16px; opacity: 0.7; margin-bottom: 0;">Context engineering, tools, automation</p>
+                    </div>
+                </div>
+                <p class="big-quote">"Prompting is what you say. Context engineering is everything AI sees."</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">2 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- BLOCK 1: THE CONTEXT ENGINEERING FRAMEWORK -->
+        <!-- ============================================== -->
+
+        <!-- SLIDE 3: The Email Test — Kitchen Table -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">The Email Test</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>5 Types of Context in One Email</h2>
+                <p style="margin-bottom: 20px;">A client emails asking to reschedule a meeting. To reply well, you need:</p>
+                <table>
+                    <tr><th>#</th><th>Context Needed</th><th>Why It Matters</th></tr>
+                    <tr><td>1</td><td>Original meeting details</td><td>What was it about?</td></tr>
+                    <tr><td>2</td><td>Your calendar</td><td>When are you free?</td></tr>
+                    <tr><td>3</td><td>Their priority level</td><td>VIP client or cold lead?</td></tr>
+                    <tr><td>4</td><td>Relationship history</td><td>3rd email or 3-year partner?</td></tr>
+                    <tr><td>5</td><td>Your current workload</td><td>Slammed or open?</td></tr>
+                </table>
+                <p style="text-align: center; font-size: 20px; opacity: 0.9;">Without any of them, your reply is worse. <span class="highlight">AI works the same way.</span></p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">3 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: The Email Test — Founder Desk -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">The Email Test</span>
+            </div>
+            <div class="slide-content">
+                <h2>Same Prompt. Different Context.</h2>
+                <div class="comparison-container">
+                    <div class="comparison-card bad">
+                        <h4><span class="label">Zero Context</span> Generic Garbage</h4>
+                        <div class="prompt-text">"Thank you for reaching out. We'd be happy to help. Please let us know your availability."</div>
+                        <div class="result">Same reply for every customer. No personalization. No value.</div>
+                    </div>
+                    <div class="comparison-card good">
+                        <h4><span class="label">Rich Context</span> Nails It</h4>
+                        <div class="prompt-text">"Hi Sarah — since you've been on our Pro plan for 2 years, I've applied the loyalty discount and rescheduled your onboarding to Thursday 2pm."</div>
+                        <div class="result">Personalized. Proactive. Shows it knows the customer.</div>
+                    </div>
+                </div>
+                <p class="big-quote">"You wouldn't ask a new hire to reply to that email on their first day. Stop doing that to AI."</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">4 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Types of Context -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Context Framework</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>4 Types of Context</h2>
+                <div class="context-types">
+                    <div class="context-type-card">
+                        <div class="type-name">Static</div>
+                        <div class="type-analogy">Your company handbook</div>
+                        <div class="type-example">Brand voice docs, product specs, pricing sheets</div>
+                    </div>
+                    <div class="context-type-card">
+                        <div class="type-name">Dynamic</div>
+                        <div class="type-analogy">Today's calendar</div>
+                        <div class="type-example">CRM data, current metrics, inventory levels</div>
+                    </div>
+                    <div class="context-type-card">
+                        <div class="type-name">Episodic</div>
+                        <div class="type-analogy">Your memory of past meetings</div>
+                        <div class="type-example">Conversation history, lessons learned, past mistakes</div>
+                    </div>
+                    <div class="context-type-card">
+                        <div class="type-name">Tool</div>
+                        <div class="type-analogy">Calling someone to ask a question</div>
+                        <div class="type-example">Slack messages, database queries, API responses</div>
+                    </div>
+                </div>
+                <p class="big-quote">"Most people only give AI static context. The magic happens when you add dynamic and tool context."</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">5 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: The 4 Operations -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Context Framework</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>4 Operations of Context Engineering</h2>
+                <div class="operations-grid">
+                    <div class="operation-card">
+                        <div class="op-name">Write</div>
+                        <div class="op-meaning">Save context outside the window</div>
+                        <div class="op-analogy">Take notes so you don't forget</div>
+                        <div class="op-example">Save to Obsidian, document decisions, create specs</div>
+                    </div>
+                    <div class="operation-card">
+                        <div class="op-name">Select</div>
+                        <div class="op-meaning">Pull the RIGHT context in</div>
+                        <div class="op-analogy">Grab the relevant folder, not the whole cabinet</div>
+                        <div class="op-example">Search notes, retrieve docs, RAG</div>
+                    </div>
+                    <div class="operation-card">
+                        <div class="op-name">Compress</div>
+                        <div class="op-meaning">Keep only what matters</div>
+                        <div class="op-analogy">Summarize a 2-hour meeting into 5 bullets</div>
+                        <div class="op-example">Summarize threads, trim history</div>
+                    </div>
+                    <div class="operation-card">
+                        <div class="op-name">Isolate</div>
+                        <div class="op-meaning">Split context for different tasks</div>
+                        <div class="op-analogy">Don't bring your grocery list to a board meeting</div>
+                        <div class="op-example">Separate chats per project, fresh context</div>
+                    </div>
+                </div>
+                <p class="big-quote">"Context engineering is doing these 4 things deliberately instead of accidentally."</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">6 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Context Hydration & The Attention Budget -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Attention Budget</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Context Hydration & The Attention Budget</h2>
+                <p><span class="highlight">Context hydration</span> = deliberately filling the context window with the right information before AI acts.</p>
+                <p style="font-size: 20px; opacity: 0.9;">Imagine reading a 500-page manual to fix a leaky faucet vs. reading the 2-page section on faucets.</p>
+                <div class="attention-chart">
+                    <div class="y-label">AI Accuracy</div>
+                    <div class="x-label">Amount of Context Added</div>
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 15%; background: #4ecdc4;"></div>
+                        <div class="chart-bar" style="height: 25%; background: #4ecdc4;"></div>
+                        <div class="chart-bar" style="height: 40%; background: #4ecdc4;"></div>
+                        <div class="chart-bar" style="height: 55%; background: #4ecdc4;"></div>
+                        <div class="chart-bar" style="height: 70%; background: #4ecdc4;"></div>
+                        <div class="chart-bar" style="height: 82%; background: #4ecdc4;"></div>
+                        <div class="chart-bar" style="height: 90%; background: #22c55e;"></div>
+                        <div class="chart-bar" style="height: 95%; background: #22c55e;"></div>
+                        <div class="chart-bar" style="height: 100%; background: var(--accent);"></div>
+                        <div class="chart-bar" style="height: 97%; background: #22c55e;"></div>
+                        <div class="chart-bar" style="height: 90%; background: #22c55e;"></div>
+                        <div class="chart-bar" style="height: 80%; background: #f97316;"></div>
+                        <div class="chart-bar" style="height: 68%; background: #f97316;"></div>
+                        <div class="chart-bar" style="height: 55%; background: #ef4444;"></div>
+                        <div class="chart-bar" style="height: 42%; background: #ef4444;"></div>
+                        <div class="chart-bar" style="height: 30%; background: #ef4444;"></div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 18px;">Relevant context <span style="color: #4ecdc4;">improves accuracy</span> &nbsp;|&nbsp; <span style="color: var(--accent);">Optimal peak</span> &nbsp;|&nbsp; Noise <span style="color: #ef4444;">hurts accuracy</span></p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">7 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Attention Budget — Founder Desk -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Attention Budget</span>
+            </div>
+            <div class="slide-content">
+                <h2>Maximum vs. Optimal Context</h2>
+                <div class="comparison-container">
+                    <div class="comparison-card bad">
+                        <h4><span class="label">Too Much</span> Entire Codebase</h4>
+                        <div class="prompt-text">*Pastes 50,000 lines of code*
+"Fix the bug"</div>
+                        <div class="result">AI gets lost. Gives generic advice. Misses the actual problem. Wastes your attention budget on irrelevant files.</div>
+                    </div>
+                    <div class="comparison-card good">
+                        <h4><span class="label">Just Right</span> Relevant File + Error</h4>
+                        <div class="prompt-text">*Pastes the 200-line file + error message*
+"Fix the bug on line 47"</div>
+                        <div class="result">AI focuses. Identifies the bug immediately. Suggests the exact fix. High-signal, low-noise.</div>
+                    </div>
+                </div>
+                <p class="big-quote">"The goal isn't maximum context. It's optimal context."</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">8 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Context Rot -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Context Rot</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Context Rot</h2>
+                <p style="font-size: 22px;">You're on a 2-hour phone call. By minute 90, you've forgotten what was said in minute 10. <span class="highlight">AI has the same problem.</span></p>
+                <h3 style="margin-top: 30px;">What context rot looks like:</h3>
+                <ul style="font-size: 22px;">
+                    <li>Long conversations get <strong>worse</strong> over time</li>
+                    <li>Important instructions from early in the chat get <strong>"buried"</strong></li>
+                    <li>AI starts <strong>contradicting</strong> its own earlier answers</li>
+                    <li>Stale information <strong>misleads</strong> decisions</li>
+                </ul>
+                <div class="why-box" style="margin-top: 25px;">
+                    <h4>Session 1 Connection</h4>
+                    <p>"Every bad prompt, every retry stays in context and pollutes future responses." Now you understand the mechanics.</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">9 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Context Rot — The Fixes -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Context Rot</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Fixing Context Rot</h2>
+                <table>
+                    <tr><th>Fix</th><th>Operation</th><th>What To Do</th></tr>
+                    <tr><td>Start fresh conversations for new tasks</td><td><span class="highlight">Isolate</span></td><td>Don't keep one giant chat forever</td></tr>
+                    <tr><td>Summarize and carry forward key decisions</td><td><span class="highlight">Compress</span></td><td>Distill, don't dump</td></tr>
+                    <tr><td>Store context externally so you can re-inject</td><td><span class="highlight">Write + Select</span></td><td>Build a second brain</td></tr>
+                    <tr><td>Use tools that auto-refresh context</td><td><span class="highlight">Dynamic</span></td><td>MCP, N8N</td></tr>
+                </table>
+                <p class="big-quote">"If your AI is getting dumber the longer you talk, it's not broken. It's rotting. And now you know how to fix it."</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">10 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- BLOCK 2: TOOLS AS CONTEXT SOLUTIONS -->
+        <!-- ============================================== -->
+
+        <!-- SLIDE 11: Section Divider -->
+        <div class="slide section-divider" data-slide="11">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label" style="background: var(--primary); color: var(--white);">Block 2</span>
+            </div>
+            <div class="slide-content">
+                <h1>Tools as Context Solutions</h1>
+                <p style="font-size: 28px;">Each tool solves a specific context problem from Block 1</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">11 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: The Tool Map -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Tool Map</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Context Problem → Tool</h2>
+                <div class="tool-map">
+                    <div class="tool-map-row">
+                        <span class="problem">"I need to research across many docs"</span>
+                        <span class="arrow">→</span>
+                        <span class="operation">Select</span>
+                        <span class="arrow">→</span>
+                        <span class="tool-name">NotebookLM</span>
+                    </div>
+                    <div class="tool-map-row">
+                        <span class="problem">"I need persistent memory across sessions"</span>
+                        <span class="arrow">→</span>
+                        <span class="operation">Write</span>
+                        <span class="arrow">→</span>
+                        <span class="tool-name">Obsidian + Vector Brain</span>
+                    </div>
+                    <div class="tool-map-row">
+                        <span class="problem">"I need AI to access my live tools & data"</span>
+                        <span class="arrow">→</span>
+                        <span class="operation">Dynamic</span>
+                        <span class="arrow">→</span>
+                        <span class="tool-name">MCP</span>
+                    </div>
+                    <div class="tool-map-row">
+                        <span class="problem">"I need context to flow automatically"</span>
+                        <span class="arrow">→</span>
+                        <span class="operation">Hydration</span>
+                        <span class="arrow">→</span>
+                        <span class="tool-name">N8N</span>
+                    </div>
+                    <div class="tool-map-row">
+                        <span class="problem">"I need to plan/structure before building"</span>
+                        <span class="arrow">→</span>
+                        <span class="operation">Compress</span>
+                        <span class="arrow">→</span>
+                        <span class="tool-name">SuperDesign</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">12 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: NotebookLM — Intro -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">NotebookLM</span>
+            </div>
+            <div class="slide-content">
+                <h2>NotebookLM — "The Research Brain"</h2>
+                <h3 style="font-size: 22px; color: #4ecdc4;">Solves: Select — pulling the right context from many sources</h3>
+                <div class="comparison-container" style="margin-top: 30px;">
+                    <div class="comparison-card">
+                        <h4 style="color: var(--accent);">Kitchen Table</h4>
+                        <p style="font-size: 20px; margin-bottom: 0;">Imagine you could upload every book you've ever read and ask questions across all of them at once.</p>
+                    </div>
+                    <div class="comparison-card" style="border-color: var(--accent);">
+                        <h4 style="color: var(--accent);">Founder Desk</h4>
+                        <p style="font-size: 20px; margin-bottom: 0;">Upload your pitch deck, market research, competitor analysis, and 20 customer interviews. Ask: <span class="highlight">"What's my biggest blind spot?"</span></p>
+                        <p style="font-size: 16px; margin-bottom: 0; margin-top: 10px; opacity: 0.8;">It connects dots across all of them.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">13 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: NotebookLM — Key Features -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">NotebookLM</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>NotebookLM — Key Features</h2>
+                <div class="tool-feature-grid">
+                    <div class="tool-feature">
+                        <div class="feature-name">1M Token Context Window</div>
+                        <div class="feature-desc">~750K words — 8x the previous limit. Upload entire research libraries.</div>
+                    </div>
+                    <div class="tool-feature">
+                        <div class="feature-name">Saved Conversation History</div>
+                        <div class="feature-desc">Episodic context persists across sessions. It remembers what you asked before.</div>
+                    </div>
+                    <div class="tool-feature">
+                        <div class="feature-name">Custom Goals & Personas</div>
+                        <div class="feature-desc">Tell it your role so responses fit your needs. "I'm a non-technical founder evaluating market fit."</div>
+                    </div>
+                    <div class="tool-feature">
+                        <div class="feature-name">Audio Overview</div>
+                        <div class="feature-desc">Turn research into a podcast for learning on the go. Great for founder commutes.</div>
+                    </div>
+                </div>
+                <div class="why-box" style="margin-top: 20px;">
+                    <h4>Context Engineering Connection</h4>
+                    <p>NotebookLM is a <strong>Select</strong> engine. It takes massive static context and lets you pull out exactly what you need. It prevents context rot because it retrieves fresh from source docs every time.</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">14 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: Obsidian + Vector Brain — Intro -->
+        <div class="slide" data-slide="15">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Obsidian</span>
+            </div>
+            <div class="slide-content">
+                <h2>Obsidian + Vector Brain — "The Second Brain"</h2>
+                <h3 style="font-size: 22px; color: #4ecdc4;">Solves: Write — persistent context that survives across sessions</h3>
+                <div class="comparison-container" style="margin-top: 30px;">
+                    <div class="comparison-card">
+                        <h4 style="color: var(--accent);">Kitchen Table</h4>
+                        <p style="font-size: 20px; margin-bottom: 0;">Your notes are scattered Post-its. A vector brain is a filing cabinet that also understands what the notes <span class="highlight">MEAN</span> and how they connect.</p>
+                    </div>
+                    <div class="comparison-card" style="border-color: var(--accent);">
+                        <h4 style="color: var(--accent);">Founder Desk</h4>
+                        <ul style="font-size: 17px; margin-left: 20px;">
+                            <li>Take your Obsidian vault (all markdown notes)</li>
+                            <li>Create vector embeddings (GPS coordinates for ideas)</li>
+                            <li>Store in a GitHub repo or gist</li>
+                            <li>AI searches by <strong>MEANING</strong>, not just keywords</li>
+                            <li>Ask "What decisions have I made about pricing?" — answers from 6 months ago</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">15 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: Obsidian — How It Works -->
+        <div class="slide" data-slide="16">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Obsidian</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Embeddings — Simply Explained</h2>
+                <div class="screenshot-box" style="margin-top: 20px; max-width: 800px;">
+                    <p class="prompt-text" style="font-size: 22px;">In meaning-space:<br><br><span style="color: #22c55e;">"king"</span> is near <span style="color: #22c55e;">"queen"</span><br>and far from <span style="color: #ef4444;">"bicycle"</span></p>
+                </div>
+                <div class="two-col" style="margin-top: 30px;">
+                    <div>
+                        <h3 style="font-size: 22px;">What You See</h3>
+                        <p style="font-size: 18px;">Obsidian graph view — visual connections between your notes. Links, tags, and ideas form a knowledge web.</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 22px;">What AI Gets</h3>
+                        <p style="font-size: 18px;">GitHub gist/repo as persistent memory. AI reads your notes across sessions and tools. Your second brain never rots.</p>
+                    </div>
+                </div>
+                <div class="why-box" style="margin-top: 20px;">
+                    <h4>Context Engineering Connection</h4>
+                    <p>This is the <strong>Write</strong> operation at scale. A permanent context store outside any single conversation.</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">16 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: MCP — Intro -->
+        <div class="slide" data-slide="17">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">MCP</span>
+            </div>
+            <div class="slide-content">
+                <h2>MCP — "The Universal Adapter"</h2>
+                <h3 style="font-size: 22px; color: #4ecdc4;">Solves: Dynamic context — connecting AI to live data and tools</h3>
+                <div class="comparison-container" style="margin-top: 30px;">
+                    <div class="comparison-card">
+                        <h4 style="color: var(--accent);">Kitchen Table</h4>
+                        <p style="font-size: 20px; margin-bottom: 0;">Remember when every phone had a different charger? USB-C fixed that. <span class="highlight">MCP is USB-C for AI</span> — one standard plug that connects AI to any tool.</p>
+                    </div>
+                    <div class="comparison-card" style="border-color: var(--accent);">
+                        <h4 style="color: var(--accent);">Founder Desk</h4>
+                        <div class="stats-box" style="grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 15px 0;">
+                            <div class="stat" style="padding: 15px;">
+                                <div class="number" style="font-size: 28px;">97M</div>
+                                <div class="label" style="font-size: 13px;">Monthly Downloads</div>
+                            </div>
+                            <div class="stat" style="padding: 15px;">
+                                <div class="number" style="font-size: 28px;">6+</div>
+                                <div class="label" style="font-size: 13px;">Major Platforms Adopted</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 16px; margin-bottom: 0; opacity: 0.8;">ChatGPT, Claude, Gemini, Cursor, VS Code. Donated to Linux Foundation — THE standard, not a fad.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">17 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 18: MCP — What It Enables -->
+        <div class="slide" data-slide="18">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">MCP</span>
+            </div>
+            <div class="slide-content">
+                <h2>MCP — How It Works</h2>
+                <div class="mcp-diagram">
+                    <div class="mcp-connections">
+                        <div class="mcp-tool">Slack</div>
+                        <div class="mcp-tool">Calendar</div>
+                        <div class="mcp-tool">Database</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                        <span style="font-size: 28px; color: var(--accent);">←→</span>
+                    </div>
+                    <div class="mcp-center">MCP</div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                        <span style="font-size: 28px; color: var(--accent);">←→</span>
+                    </div>
+                    <div class="mcp-connections">
+                        <div class="mcp-tool">Claude</div>
+                        <div class="mcp-tool">ChatGPT</div>
+                        <div class="mcp-tool">Cursor</div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 22px; margin: 20px 0;">"Instead of copy-pasting data <strong>INTO</strong> AI, MCP lets AI reach <strong>OUT</strong> and grab it."</p>
+                <div class="why-box">
+                    <h4>Context Engineering Connection</h4>
+                    <p>MCP solves <strong>dynamic context</strong> — live, changing data that static docs can't capture. Your AI goes from "answering with what it knows" to "answering with what it can look up."</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">18 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: N8N — The Autopilot -->
+        <div class="slide" data-slide="19">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">N8N</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>N8N — "The Autopilot"</h2>
+                <h3 style="font-size: 22px; color: #4ecdc4;">Solves: Context hydration — automatically assembling the right context</h3>
+                <p style="font-size: 20px; margin-top: 15px;"><strong>Kitchen table:</strong> A virtual assistant who watches for triggers. "When X happens, gather Y, do Z."</p>
+                <h3 style="font-size: 20px; margin-top: 25px;">Founder Example: Content Autopilot</h3>
+                <div class="flow-diagram">
+                    <div class="flow-node trigger">Article Link</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node action">Spreadsheet</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node ai">AI Summary</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node action">Social Media</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node trigger">Track Engagement</div>
+                </div>
+                <h3 style="font-size: 20px; margin-top: 20px;">Founder Example: Lead Hydration</h3>
+                <div class="flow-diagram">
+                    <div class="flow-node trigger">New Lead Signs Up</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node action">Grab LinkedIn + Company Info</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node ai">Hydrate AI Agent</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node action">Draft Welcome Email</div>
+                </div>
+                <div class="why-box" style="margin-top: 20px;">
+                    <h4>Context Engineering Connection</h4>
+                    <p>N8N is the <strong>hydration engine</strong>. It auto-assembles context from multiple sources. Instead of you copy-pasting 5 things, N8N does it every time.</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">19 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 20: SuperDesign — The Design Shortcut -->
+        <div class="slide" data-slide="20">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">SuperDesign</span>
+            </div>
+            <div class="slide-content">
+                <h2>SuperDesign — "The Design Shortcut"</h2>
+                <h3 style="font-size: 22px; color: #4ecdc4;">Solves: Compress + Isolate — structuring intent before building</h3>
+                <div class="comparison-container" style="margin-top: 30px;">
+                    <div class="comparison-card">
+                        <h4 style="color: var(--accent);">Kitchen Table</h4>
+                        <p style="font-size: 20px; margin-bottom: 0;">Instead of describing what you want a room to look like in 500 words, you show a photo and say <span class="highlight">"like this, but blue."</span></p>
+                    </div>
+                    <div class="comparison-card" style="border-color: var(--accent);">
+                        <h4 style="color: var(--accent);">Founder Desk</h4>
+                        <ul style="font-size: 17px; margin-left: 20px;">
+                            <li>Describe a dashboard in plain language</li>
+                            <li>Get <strong>10+ design variants</strong></li>
+                            <li>Pick one → get production-ready code</li>
+                            <li>Open source, runs in VS Code/Cursor, works offline</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="why-box" style="margin-top: 25px;">
+                    <h4>Context Engineering Connection</h4>
+                    <p>Design <strong>compresses</strong> your intent into a visual artifact. That visual becomes high-signal context for the build phase. You <strong>isolate</strong> "what should it look like" from "how do I build it."</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">20 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- BLOCK 3: PUTTING IT ALL TOGETHER -->
+        <!-- ============================================== -->
+
+        <!-- SLIDE 21: Section Divider -->
+        <div class="slide section-divider" data-slide="21">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label" style="background: var(--primary); color: var(--white);">Block 3</span>
+            </div>
+            <div class="slide-content">
+                <h1>Putting It All Together</h1>
+                <p style="font-size: 28px;">From framework to practice</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">21 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 22: The Adoption App Case Study -->
+        <div class="slide" data-slide="22">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Case Study</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>The Adoption App — Context Decisions</h2>
+                <div style="margin-top: 15px;">
+                    <div class="case-stage">
+                        <span class="stage-name">Research</span>
+                        <span class="stage-decision">"I need to understand adoption workflows"</span>
+                        <span class="stage-tool">NotebookLM (shelter docs, competitor apps)</span>
+                        <span class="stage-op">Select</span>
+                    </div>
+                    <div class="case-stage">
+                        <span class="stage-name">Memory</span>
+                        <span class="stage-decision">"I need to remember decisions across sessions"</span>
+                        <span class="stage-tool">Obsidian notes, GitHub repo</span>
+                        <span class="stage-op">Write</span>
+                    </div>
+                    <div class="case-stage">
+                        <span class="stage-name">Design</span>
+                        <span class="stage-decision">"I need to see it before building it"</span>
+                        <span class="stage-tool">SuperDesign (10 UI variants)</span>
+                        <span class="stage-op">Compress</span>
+                    </div>
+                    <div class="case-stage">
+                        <span class="stage-name">Build</span>
+                        <span class="stage-decision">"AI needs access to my codebase and data"</span>
+                        <span class="stage-tool">MCP (connected to files, DB)</span>
+                        <span class="stage-op">Dynamic</span>
+                    </div>
+                    <div class="case-stage">
+                        <span class="stage-name">Iterate</span>
+                        <span class="stage-decision">"Fresh context for each feature"</span>
+                        <span class="stage-tool">New conversations per feature</span>
+                        <span class="stage-op">Isolate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">22 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 23: Case Study Key Line -->
+        <div class="slide" data-slide="23">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Case Study</span>
+            </div>
+            <div class="slide-content">
+                <div class="screenshot-box">
+                    <p class="prompt-text" style="font-size: 28px; line-height: 1.6;">"Every single thing here was written with AI.<br><br>The difference isn't the prompts —<br>it's the <span style="color: var(--primary); font-weight: 900;">context I engineered</span> around them."</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">23 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 24: Decision Framework — What Do I Need? -->
+        <div class="slide" data-slide="24">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Decision Framework</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Which Tool Solves My Problem?</h2>
+                <div class="decision-tree">
+                    <span class="question">What do I need?</span><br>
+                    <div class="branch">
+                        ├── Research across many docs? → <span class="answer">NotebookLM</span><br>
+                        ├── Remember things across sessions? → <span class="answer">Obsidian + Vector Brain</span><br>
+                        ├── Connect AI to live tools & data? → <span class="answer">MCP</span><br>
+                        ├── Automate context assembly? → <span class="answer">N8N</span><br>
+                        └── Plan visually before building? → <span class="answer">SuperDesign</span>
+                    </div>
+                </div>
+                <div class="decision-tree" style="margin-top: 15px;">
+                    <span class="question">What operation am I performing?</span><br>
+                    <div class="branch">
+                        ├── Need to save context? → <span class="answer">Write</span> (Obsidian, docs, GitHub)<br>
+                        ├── Need to retrieve context? → <span class="answer">Select</span> (NotebookLM, search, RAG)<br>
+                        ├── Need to trim context? → <span class="answer">Compress</span> (summarize, fresh chats)<br>
+                        └── Need to separate tasks? → <span class="answer">Isolate</span> (new chats, project separation)
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">24 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 25: Context Audit Exercise -->
+        <div class="slide" data-slide="25">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Exercise</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Context Audit — Your Turn</h2>
+                <div class="exercise-steps">
+                    <div class="exercise-step">
+                        <div class="step-num">1</div>
+                        <div>
+                            <div class="step-text">List your top 3 business info sources</div>
+                            <div class="step-hint">Email, CRM, docs, Slack, notes, calendar...</div>
+                        </div>
+                    </div>
+                    <div class="exercise-step">
+                        <div class="step-num">2</div>
+                        <div>
+                            <div class="step-text">Categorize each source</div>
+                            <div class="step-hint">Static, Dynamic, Episodic, or Tool?</div>
+                        </div>
+                    </div>
+                    <div class="exercise-step">
+                        <div class="step-num">3</div>
+                        <div>
+                            <div class="step-text">Map the context problem</div>
+                            <div class="step-hint">Which operation do you need? Write, Select, Compress, or Isolate?</div>
+                        </div>
+                    </div>
+                    <div class="exercise-step">
+                        <div class="step-num">4</div>
+                        <div>
+                            <div class="step-text">Pick the tool</div>
+                            <div class="step-hint">Which tool from today unlocks this?</div>
+                        </div>
+                    </div>
+                    <div class="exercise-step">
+                        <div class="step-num">5</div>
+                        <div>
+                            <div class="step-text" style="color: var(--accent); font-weight: 700;">Commitment: One tool to try this week</div>
+                            <div class="step-hint">Start small. One tool. One workflow. This week.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">25 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 26: Common Context Mistakes -->
+        <div class="slide" data-slide="26">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Common Mistakes</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Common Context Mistakes</h2>
+                <table>
+                    <tr><th>Mistake</th><th>Why It Happens</th><th>Fix</th></tr>
+                    <tr>
+                        <td>Pasting everything into one chat</td>
+                        <td>Think more = better</td>
+                        <td><span class="highlight">Attention budget</span> — select, don't dump</td>
+                    </tr>
+                    <tr>
+                        <td>Never starting fresh conversations</td>
+                        <td>Don't want to "lose" context</td>
+                        <td><span class="highlight">Isolate</span> — context rots, re-inject what matters</td>
+                    </tr>
+                    <tr>
+                        <td>Not saving important decisions</td>
+                        <td>Living in the chat</td>
+                        <td><span class="highlight">Write</span> — external storage (Obsidian, docs)</td>
+                    </tr>
+                    <tr>
+                        <td>Manually copy-pasting data</td>
+                        <td>Don't know about MCP/N8N</td>
+                        <td><span class="highlight">Connect tools</span> — automate hydration</td>
+                    </tr>
+                    <tr>
+                        <td>Same chat for every project</td>
+                        <td>Convenience</td>
+                        <td><span class="highlight">Isolate</span> — separate context per project</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">26 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 27: Quick Reference Card -->
+        <div class="slide" data-slide="27">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Quick Reference</span>
+            </div>
+            <div class="slide-content top-aligned">
+                <h2>Quick Reference Card</h2>
+                <div class="quick-ref">
+                    <div class="quick-ref-section">
+                        <h4>4 Types of Context</h4>
+                        <div class="ref-item"><span>Static</span><span>Docs, specs, guidelines</span></div>
+                        <div class="ref-item"><span>Dynamic</span><span>Live data, metrics, CRM</span></div>
+                        <div class="ref-item"><span>Episodic</span><span>History, past decisions</span></div>
+                        <div class="ref-item"><span>Tool</span><span>Connected system outputs</span></div>
+                    </div>
+                    <div class="quick-ref-section">
+                        <h4>4 Operations</h4>
+                        <div class="ref-item"><span>Write</span><span>Save context externally</span></div>
+                        <div class="ref-item"><span>Select</span><span>Pull in the right context</span></div>
+                        <div class="ref-item"><span>Compress</span><span>Keep only what matters</span></div>
+                        <div class="ref-item"><span>Isolate</span><span>Separate by task/project</span></div>
+                    </div>
+                    <div class="quick-ref-section">
+                        <h4>5 Tools</h4>
+                        <div class="ref-item"><span class="ref-tool">NotebookLM</span><span>Research (Select)</span></div>
+                        <div class="ref-item"><span class="ref-tool">Obsidian</span><span>Memory (Write)</span></div>
+                        <div class="ref-item"><span class="ref-tool">MCP</span><span>Live Data (Dynamic)</span></div>
+                        <div class="ref-item"><span class="ref-tool">N8N</span><span>Automation (Hydration)</span></div>
+                        <div class="ref-item"><span class="ref-tool">SuperDesign</span><span>Planning (Compress)</span></div>
+                    </div>
+                    <div class="quick-ref-section">
+                        <h4>Key Concepts</h4>
+                        <div class="ref-item"><span>Context Hydration</span><span>Fill before AI acts</span></div>
+                        <div class="ref-item"><span>Attention Budget</span><span>Optimal, not maximum</span></div>
+                        <div class="ref-item"><span>Context Rot</span><span>Long chats decay</span></div>
+                        <div class="ref-item"><span>Second Brain</span><span>External memory store</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">27 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 28: Your Homework -->
+        <div class="slide" data-slide="28">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Homework</span>
+            </div>
+            <div class="slide-content">
+                <h2>Your Homework</h2>
+                <div class="exercise-steps" style="max-width: 800px; margin: 30px auto;">
+                    <div class="exercise-step">
+                        <div class="step-num">1</div>
+                        <div>
+                            <div class="step-text">Today: Start a fresh AI chat for your next task</div>
+                            <div class="step-hint">Practice the Isolate operation</div>
+                        </div>
+                    </div>
+                    <div class="exercise-step">
+                        <div class="step-num">2</div>
+                        <div>
+                            <div class="step-text">This week: Try ONE tool from today's session</div>
+                            <div class="step-hint">NotebookLM is the easiest starting point</div>
+                        </div>
+                    </div>
+                    <div class="exercise-step">
+                        <div class="step-num">3</div>
+                        <div>
+                            <div class="step-text">Next time: Before prompting, ask "What context does AI need?"</div>
+                            <div class="step-hint">Make context engineering your default habit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">28 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 29: Q&A -->
+        <div class="slide" data-slide="29">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Q&A</span>
+            </div>
+            <div class="slide-content qa-slide">
+                <h1>Q&A</h1>
+                <p class="subtitle">What questions do you have?</p>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">29 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 30: Thank You -->
+        <div class="slide title-slide" data-slide="30">
+            <div class="slide-header">
+                <img class="logo-placeholder" src="../techtown_logo.png" alt="TechTown Logo">
+                <span class="section-label">Thank You</span>
+            </div>
+            <div class="slide-content thankyou-slide">
+                <h1>Thank You</h1>
+                <p style="font-size: 28px;"><strong>JD Fiscus</strong></p>
+                <p style="font-size: 22px; opacity: 0.8;">TechTown Start Studio</p>
+                <p class="tagline">"Don't pray. Plan the context."</p>
+                <div style="margin-top: 40px; opacity: 0.7;">
+                    <p style="font-size: 16px;">Quick reference card &bull; QR codes to each tool &bull; Link to slides</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">30 / 30</span>
+                <span class="footer-text">TechTown Start Studio | Session 2</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="nav-hint" id="navHint">Use arrow keys to navigate</div>
+
+    <script>
+        // Slide Navigation
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+
+            currentSlide = index;
+
+            // Update URL hash
+            window.location.hash = `slide-${index + 1}`;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                case 'ArrowDown':
+                case ' ':
+                case 'PageDown':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                case 'PageUp':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    showSlide(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    showSlide(totalSlides - 1);
+                    break;
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Show navigation hint on load
+        const navHint = document.getElementById('navHint');
+        setTimeout(() => {
+            navHint.classList.add('visible');
+            setTimeout(() => {
+                navHint.classList.remove('visible');
+            }, 3000);
+        }, 1000);
+
+        // Handle URL hash on load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const match = hash.match(/slide-(\d+)/);
+                if (match) {
+                    const slideNum = parseInt(match[1]) - 1;
+                    showSlide(slideNum);
+                }
+            }
+        });
+
+        // Handle hash changes
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash;
+            const match = hash.match(/slide-(\d+)/);
+            if (match) {
+                const slideNum = parseInt(match[1]) - 1;
+                if (slideNum !== currentSlide) {
+                    showSlide(slideNum);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meeting → Brainstorm → Build</title>
+<style>
+  :root {
+    --bg: #0b0618;
+    --bg-soft: #160b2e;
+    --fg: #f4f1ff;
+    --muted: #a39bc2;
+    --accent: #8a4fff;
+    --accent-2: #c084fc;
+    --accent-glow: rgba(138, 79, 255, 0.35);
+    --code-bg: #1a1033;
+    --code-border: #2d1d56;
+    --success: #4ade80;
+    --warn: #fbbf24;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    overflow: hidden;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at top left, var(--accent-glow) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(192, 132, 252, 0.15) 0%, transparent 50%),
+      var(--bg);
+  }
+
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 5vh 8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 300ms ease, transform 300ms ease;
+    overflow-y: auto;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* Typography */
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--fg) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: var(--accent-2);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  p, li {
+    font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+    color: var(--fg);
+    margin-bottom: 0.75rem;
+  }
+
+  p.lead {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    color: var(--muted);
+    max-width: 900px;
+    margin-bottom: 2rem;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.5rem; }
+
+  strong { color: var(--accent-2); font-weight: 600; }
+  em { color: var(--muted); font-style: italic; }
+
+  .muted { color: var(--muted); }
+  .tiny { font-size: 0.9rem; color: var(--muted); }
+
+  /* Code + prompts */
+  pre, code {
+    font-family: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    max-height: 55vh;
+    overflow-y: auto;
+    position: relative;
+    white-space: pre-wrap;
+    line-height: 1.5;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 150ms;
+  }
+
+  .copy-btn:hover { opacity: 1; }
+  .copy-btn.copied { background: var(--success); color: var(--bg); }
+
+  /* Layout helpers */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .split.stacked { grid-template-columns: 1fr; }
+
+  .card {
+    background: var(--bg-soft);
+    border: 1px solid var(--code-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin: 1.5rem 0;
+  }
+
+  .chain-step {
+    background: var(--bg-soft);
+    border: 1px solid var(--accent);
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 1.2vw, 1.15rem);
+    white-space: nowrap;
+  }
+
+  .chain-step.highlight {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 30px var(--accent-glow);
+  }
+
+  .chain-step.ghost {
+    opacity: 0.5;
+    border-style: dashed;
+  }
+
+  .chain-arrow {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  .kicker {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .big-number {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+
+  .quote {
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    font-weight: 500;
+    font-style: italic;
+    color: var(--accent-2);
+    max-width: 1000px;
+    line-height: 1.35;
+    margin: 2rem 0;
+    padding-left: 2rem;
+    border-left: 4px solid var(--accent);
+  }
+
+  .quote-attr { font-size: 1rem; color: var(--muted); font-style: normal; }
+
+  /* Nav chrome */
+  .chrome {
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 300ms ease;
+    box-shadow: 0 0 10px var(--accent-glow);
+    z-index: 20;
+  }
+
+  .slide-num {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .brand {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .brand strong { color: var(--accent-2); }
+
+  .help {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted);
+    font-size: 0.75rem;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  kbd {
+    background: var(--bg-soft);
+    border: 1px solid var(--code-border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.85em;
+  }
+
+  /* Matrix visual */
+  .matrix {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 0.5rem;
+    max-width: 700px;
+    margin: 1.5rem 0;
+  }
+
+  .matrix-cell {
+    background: var(--bg-soft);
+    border: 1px solid var(--code-border);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 110px;
+  }
+
+  .matrix-cell h4 { font-size: 0.9rem; color: var(--accent-2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .matrix-cell ul { padding-left: 1rem; margin: 0; }
+  .matrix-cell li { font-size: 0.85rem; margin-bottom: 0.25rem; color: var(--fg); }
+  .matrix-label { display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .matrix-label.rotate { writing-mode: vertical-rl; transform: rotate(180deg); }
+
+  .matrix-cell.quickwin { border-color: var(--success); background: rgba(74, 222, 128, 0.08); }
+  .matrix-cell.bigbet { border-color: var(--accent); background: rgba(138, 79, 255, 0.12); }
+  .matrix-cell.fillin { border-color: var(--warn); background: rgba(251, 191, 36, 0.08); }
+  .matrix-cell.timesink { border-color: #555; opacity: 0.6; }
+
+  /* Title slide special */
+  .slide.title { text-align: center; align-items: center; }
+  .slide.title h1 { font-size: clamp(3rem, 8vw, 7rem); }
+  .slide.title .lead { text-align: center; margin: 0 auto 2rem; }
+
+  /* VTT excerpt */
+  .transcript {
+    background: var(--code-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .transcript .speaker { color: var(--accent-2); font-weight: 700; }
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+<!-- 1. TITLE -->
+<section class="slide title active">
+  <span class="kicker">Sponsored by Hostinger</span>
+  <h1>Meeting → Brainstorm → Build</h1>
+  <p class="lead">Turning messy meeting ideas into shipped internal tools — with portable AI skills + Horizons.</p>
+  <p class="muted">JD Fiscus · 45 min working session</p>
+</section>
+
+<!-- 2. THE OPENER -->
+<section class="slide">
+  <h3>My problem</h3>
+  <h1>I don't understand personal finance.</h1>
+  <p class="lead">And I didn't love any of the tools out there — they're either too simple, too complex, or they want to manage my money instead of teaching me.</p>
+</section>
+
+<!-- 3. WILSON -->
+<section class="slide">
+  <h3>So I built</h3>
+  <h1>Wilson</h1>
+  <p class="lead"><strong>openaccountant.ai</strong> — a dev- and agent-centric harness for thinking about your money the way a smart accountant would.</p>
+  <p class="muted">Which got me thinking: how do you make decisions when you're not the expert?</p>
+</section>
+
+<!-- 4. THE GAP -->
+<section class="slide">
+  <h3>The real problem</h3>
+  <h1>I'm not an expert.</h1>
+  <p class="lead">I needed a <strong>system</strong> — a way to brainstorm, prioritize, and act on complex problems without 20 years of domain knowledge.</p>
+</section>
+
+<!-- 5. ENTER THINKING FRAMEWORKS -->
+<section class="slide">
+  <h3>The breakthrough</h3>
+  <h1>Thinking frameworks</h1>
+  <p class="lead">Downloaded <strong>github.com/lyndonkl/claude</strong> — a library of 95 reusable thinking frameworks, packaged as <strong>skills</strong>.</p>
+  <p>Prioritization. Fermi estimation. Decision matrices. Root cause analysis. All the tools a senior operator would reach for, available on tap.</p>
+</section>
+
+<!-- 6. WHAT IS A SKILL -->
+<section class="slide">
+  <h3>What's a skill?</h3>
+  <h1>Just structured markdown.</h1>
+  <div class="split">
+    <div>
+      <p>No code. No API. No plugin architecture.</p>
+      <p>A markdown file with a <code>description</code> the LLM uses to decide when to load it, and a workflow it follows once loaded.</p>
+      <p class="muted">If your LLM can read, it can run a skill.</p>
+    </div>
+    <div>
+<pre><code>---
+name: brainstorm-diverge-converge
+description: Use when generating
+  creative options before narrowing
+  to the best choices...
+---
+
+# Brainstorm Diverge-Converge
+
+## Workflow
+1. Diverge — generate 20-50 ideas
+2. Cluster — group into themes
+3. Converge — score and select
+...</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- 7. INSTALL IN CLAUDE DESKTOP -->
+<section class="slide">
+  <h3>Setup · Claude Desktop</h3>
+  <h2>Install once, use everywhere</h2>
+  <ol>
+    <li>Open Claude Desktop → <strong>Settings → Plugins / Skills</strong></li>
+    <li>Search <strong>thinking-frameworks</strong> (or add from <code>lyndonkl/claude</code>)</li>
+    <li>Click install</li>
+    <li>Type <em>"brainstorm"</em> in any chat — the skill activates automatically</li>
+  </ol>
+  <p class="muted">No restart. No config file. Just markdown loaded on demand.</p>
+</section>
+
+<!-- 8. PORTABILITY -->
+<section class="slide">
+  <h3>The same skill in ChatGPT</h3>
+  <h2>Skills are portable text.</h2>
+  <p class="lead">ChatGPT doesn't have a skill system. Doesn't need one.</p>
+  <ol>
+    <li>Open the SKILL.md file on GitHub</li>
+    <li>Copy the full contents</li>
+    <li>Paste into ChatGPT as <strong>Custom Instructions</strong> or at the start of a chat</li>
+    <li>Prompt normally — ChatGPT follows the framework</li>
+  </ol>
+  <p><strong>Same framework, any LLM.</strong> No vendor lock-in.</p>
+</section>
+
+<!-- 9. THE SCENARIO -->
+<section class="slide">
+  <h3>Our working scenario</h3>
+  <h1>The support team is drowning.</h1>
+  <div class="split">
+    <div>
+      <p><strong>1,400 tickets</strong> last week. Up 20% month-over-month.</p>
+      <p><strong>22 minutes</strong> average handle time.</p>
+      <p><strong>6 agents</strong>. Backlog growing. Maya's about to lose people.</p>
+      <p class="muted">Today's artifact: the support-team-meeting.vtt — 7 minutes of real meeting chaos.</p>
+    </div>
+    <div>
+      <div class="transcript">
+        <p><span class="speaker">Maya:</span> We did fourteen hundred tickets last week. Fourteen hundred.</p>
+        <p><span class="speaker">Alex:</span> Wait, can I ask something obvious? Do we know what people are actually emailing us about?</p>
+        <p><span class="speaker">Priya:</span> I've been wanting to build an internal triage dashboard for a while...</p>
+        <p><span class="speaker">Sam:</span> What are we thinking in terms of solutions?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. THE CHAIN -->
+<section class="slide">
+  <h3>The pipeline</h3>
+  <h2>From messy meeting to shipped tool — in 5 steps.</h2>
+  <div class="chain">
+    <div class="chain-step">1. Extract problems</div>
+    <span class="chain-arrow">→</span>
+    <div class="chain-step">2. Prioritize</div>
+    <span class="chain-arrow">→</span>
+    <div class="chain-step">3. Brainstorm</div>
+    <span class="chain-arrow">→</span>
+    <div class="chain-step">4. Build prompt</div>
+    <span class="chain-arrow">→</span>
+    <div class="chain-step highlight">5. Horizon builds it</div>
+  </div>
+  <p class="muted">Each step is one prompt. Each output feeds the next. No step is optional — skip prioritization and you brainstorm the wrong thing. Skip the build prompt and Horizon guesses.</p>
+</section>
+
+<!-- 11. STEP 1: EXTRACT -->
+<section class="slide">
+  <h3>Step 1 · Extract problems</h3>
+  <h2>Transcript → structured problem list</h2>
+  <p class="lead">Read the VTT. Pull every explicit or implied pain. Attribute to speaker. Cluster by theme.</p>
+<pre><code>Read this meeting transcript and extract every problem
+statement — explicit or implied. For each:
+  - one-sentence problem
+  - who raised it
+  - supporting quote
+  - theme (operational / tooling / process / people)
+
+Deduplicate. Cluster into 4-8 themes. Output as a table.
+
+[Paste VTT below]</code><button class="copy-btn">Copy</button></pre>
+</section>
+
+<!-- 12. STEP 2: PRIORITIZE -->
+<section class="slide">
+  <h3>Step 2 · Prioritize (effort × impact)</h3>
+  <h2>Which problem is worth building for?</h2>
+  <p>You can't brainstorm on all 7. Filter for <strong>tool-shaped</strong>, <strong>MVP-scoped</strong>, <strong>not already off-the-shelf</strong>.</p>
+  <div class="matrix">
+    <div></div>
+    <div class="matrix-label">Low Effort</div>
+    <div class="matrix-label">High Effort</div>
+
+    <div class="matrix-label rotate">High Impact</div>
+    <div class="matrix-cell quickwin">
+      <h4>Quick Wins</h4>
+      <ul>
+        <li>Status page</li>
+        <li>Root-cause tagging</li>
+        <li>Office hours</li>
+      </ul>
+    </div>
+    <div class="matrix-cell bigbet">
+      <h4>Big Bets</h4>
+      <ul>
+        <li>Onboarding rebuild</li>
+        <li>Tier 1/2 reorg</li>
+        <li>Triage dashboard ⬅</li>
+      </ul>
+    </div>
+
+    <div class="matrix-label rotate">Low Impact</div>
+    <div class="matrix-cell fillin">
+      <h4>Fill-Ins</h4>
+      <ul>
+        <li>Auto-responses (v1)</li>
+      </ul>
+    </div>
+    <div class="matrix-cell timesink">
+      <h4>Time Sinks</h4>
+      <ul>
+        <li>Hire 3 agents</li>
+        <li>Full tier-1 automation</li>
+      </ul>
+    </div>
+  </div>
+  <p class="muted">Invoke <code>/prioritization-effort-impact</code> with the problem list. Pick the candidate that's buildable in Horizons — today that's the <strong>triage dashboard</strong>.</p>
+</section>
+
+<!-- 13. STEP 3: BRAINSTORM -->
+<section class="slide">
+  <h3>Step 3 · Brainstorm on ONE thing</h3>
+  <h2>Go deep on the triage dashboard.</h2>
+<pre><code>Using the brainstorm-diverge-converge framework,
+brainstorm features for an internal Support Triage
+Dashboard.
+
+Problem context:
+- Support team: 6 agents, 1,400 tickets/week, 22min AHT
+- Devon currently eyeballs ticket priority manually
+- Priya wants: volume by category, SLA status, who's working what
+- Must integrate (or mock) Zendesk data
+
+Phase 1 — Diverge: 25+ feature ideas, no filtering
+Phase 2 — Cluster: 4-8 themes
+Phase 3 — Converge: score on Impact × Effort,
+  bucket into Ship-with-MVP / Week-1 / Month-2 / Defer
+
+Output the ranked feature list.</code><button class="copy-btn">Copy</button></pre>
+</section>
+
+<!-- 14. THE MISSING PIECE -->
+<section class="slide">
+  <h3>Step 4 · The missing piece</h3>
+  <h2>Brainstorm output ≠ build prompt.</h2>
+  <div class="split">
+    <div>
+      <p>The brainstorm gives you a <strong>ranked feature list</strong>.</p>
+      <p>Horizons needs a <strong>build spec</strong>: app name, user, features-as-UI, data shape, stack, zero ambiguity.</p>
+      <p class="muted">Paste the raw brainstorm into Horizons and you'll get generic slop. One extra translation prompt fixes it.</p>
+    </div>
+    <div>
+      <div class="chain" style="flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+        <div class="chain-step ghost">Ranked features (essay)</div>
+        <span class="chain-arrow">↓</span>
+        <div class="chain-step highlight">Translate</div>
+        <span class="chain-arrow">↓</span>
+        <div class="chain-step">Build spec (paste-ready)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15. THE HORIZON PROMPT GENERATOR -->
+<section class="slide">
+  <h3>The translator prompt</h3>
+<pre><code>Take the brainstorm output below and produce a single
+paste-ready prompt for Hostinger Horizons that builds
+a working MVP in one shot.
+
+The output prompt must:
+  1. Name the app + one-line purpose
+  2. Describe the user (who, why, context)
+  3. List each "Ship with MVP" feature as a concrete
+     UI requirement — what's on screen, what data
+  4. Specify data shape with realistic mock data
+     (include a Seed Data button for 200+ rows)
+  5. Name the stack: React + Tailwind + shadcn/ui
+     + recharts
+  6. Pre-resolve every ambiguity — zero questions
+
+Exclude: auth, backend APIs, multi-user, Month-2
+features. MVP only.
+
+Structure: "Build a..." → end with a specific CTA.
+
+[Paste brainstorm output below]</code><button class="copy-btn">Copy</button></pre>
+</section>
+
+<!-- 16. BUILD IN HORIZON -->
+<section class="slide">
+  <h3>Step 5 · Build in Horizons</h3>
+  <h1>Paste. Wait. Ship.</h1>
+  <p class="lead">The generated prompt goes straight into Hostinger Horizons. One shot. Out comes a working <strong>Support Triage Dashboard</strong> — volume by category, SLA countdown, agent workload, seed button, the works.</p>
+  <p class="muted">Next level: the same prompt works in Lovable, v0, or any modern AI app builder.</p>
+</section>
+
+<!-- 17. BONUS -->
+<section class="slide">
+  <h3>Bonus</h3>
+  <h1>95 skills, one repo.</h1>
+  <p class="lead">Everything you saw today is four skills from a library of <strong>95</strong>.</p>
+  <div class="split">
+    <div>
+      <h3>For deciding</h3>
+      <ul>
+        <li>decision-matrix</li>
+        <li>kill-criteria-exit-ramps</li>
+        <li>expected-value</li>
+      </ul>
+    </div>
+    <div>
+      <h3>For estimating</h3>
+      <ul>
+        <li>estimation-fermi</li>
+        <li>financial-unit-economics</li>
+        <li>metrics-tree</li>
+      </ul>
+    </div>
+    <div>
+      <h3>For investigating</h3>
+      <ul>
+        <li>causal-inference-root-cause</li>
+        <li>systems-thinking-leverage</li>
+        <li>synthesis-and-analogy</li>
+      </ul>
+    </div>
+    <div>
+      <h3>For building</h3>
+      <ul>
+        <li>one-pager-prd</li>
+        <li>meta-prompt-engineering</li>
+        <li>adr-architecture</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 18. CLOSE -->
+<section class="slide title">
+  <h3>What you take home</h3>
+  <h1>Skills are portable.<br/>Meetings become action.</h1>
+  <p class="lead">Grab the repo → install in Claude Desktop (or paste into ChatGPT) → run the chain on your next meeting → ship the tool by Friday.</p>
+  <div class="split" style="margin-top: 2rem; max-width: 800px;">
+    <div class="card">
+      <h3>Resources</h3>
+      <p>github.com/lyndonkl/claude</p>
+      <p>hostinger.com/horizons</p>
+      <p class="muted">Full session assets: the repo linked above</p>
+    </div>
+    <div class="card">
+      <h3>Thanks to</h3>
+      <p><strong>Hostinger</strong> for sponsoring</p>
+      <p><strong>Kushal</strong> for the skills library</p>
+      <p><strong>Nick</strong> for the premise</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="chrome">
+  <div class="brand"><strong>Meeting → Build</strong> · JD Fiscus</div>
+  <div class="slide-num" id="slideNum">1 / 18</div>
+</div>
+
+<div class="help">
+  <kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>Space</kbd> next · <kbd>F</kbd> fullscreen · <kbd>Home</kbd> first · <kbd>End</kbd> last
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const progress = document.getElementById('progress');
+  const slideNum = document.getElementById('slideNum');
+  let current = 0;
+
+  function show(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+    progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+    slideNum.textContent = `${current + 1} / ${slides.length}`;
+    const hash = `#${current + 1}`;
+    if (location.hash !== hash) history.replaceState(null, '', hash);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault();
+        show(current + 1);
+        break;
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault();
+        show(current - 1);
+        break;
+      case 'Home':
+        e.preventDefault();
+        show(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        show(slides.length - 1);
+        break;
+      case 'f':
+      case 'F':
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen();
+        break;
+    }
+  });
+
+  // Click to advance
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.copy-btn') || e.target.closest('pre')) return;
+    if (e.target.closest('a')) return;
+    show(current + 1);
+  });
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const pre = btn.parentElement;
+      const code = pre.querySelector('code').innerText;
+      try {
+        await navigator.clipboard.writeText(code);
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1500);
+      } catch (err) {
+        btn.textContent = 'Error';
+      }
+    });
+  });
+
+  // Deep-link support
+  const initial = parseInt(location.hash.replace('#', ''), 10);
+  if (!isNaN(initial) && initial >= 1 && initial <= slides.length) {
+    show(initial - 1);
+  } else {
+    show(0);
+  }
+
+  window.addEventListener('hashchange', () => {
+    const n = parseInt(location.hash.replace('#', ''), 10);
+    if (!isNaN(n)) show(n - 1);
+  });
+</script>
+</body>
+</html>
