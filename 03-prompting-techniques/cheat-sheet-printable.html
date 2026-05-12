@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prompting Cheat Sheet — TechTown</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        @page { size: letter; margin: 0.4in; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; font-size: 10pt; line-height: 1.35; color: #1a1a1a; }
+        h1 { font-size: 18pt; color: #0c5449; margin-bottom: 4pt; }
+        h2 { font-size: 11pt; color: #0c5449; margin-top: 8pt; margin-bottom: 4pt; text-transform: uppercase; letter-spacing: 0.5pt; }
+        h3 { font-size: 9pt; font-weight: 700; margin-bottom: 2pt; }
+        pre, code { font-family: 'Roboto Mono', monospace; font-size: 8pt; background: #f5f5f5; padding: 4pt 6pt; border-radius: 3pt; }
+        pre { white-space: pre-wrap; margin: 2pt 0 4pt 0; }
+        ul { margin-left: 14pt; }
+        li { margin-bottom: 2pt; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+        .accent { color: #ffcc33; background: #1a1a1a; padding: 2pt 4pt; border-radius: 2pt; font-weight: 700; }
+        .header { border-bottom: 2pt solid #0c5449; padding-bottom: 4pt; margin-bottom: 8pt; display: flex; justify-content: space-between; align-items: flex-end; }
+        .footer { margin-top: 8pt; padding-top: 4pt; border-top: 1pt solid #ccc; font-size: 8pt; color: #666; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Prompting Cheat Sheet</h1>
+            <p style="font-size: 9pt; color: #666;">5 techniques. Built for build time.</p>
+        </div>
+        <div style="font-size: 8pt; color: #666; text-align: right;">
+            TechTown Start Studio<br>JD Fiscus
+        </div>
+    </div>
+
+    <h2>The 4 Layers</h2>
+
+    <div class="grid">
+        <div>
+            <h3>Layer 1 — V1: Just ask</h3>
+            <p style="font-size: 9pt;">Whatever you'd normally type. Almost always too vague.</p>
+
+            <h3 style="margin-top: 6pt;">Layer 2 — Role + Context + Task + Format</h3>
+            <pre># Role
+You are a senior product engineer...
+
+# Context
+- Business specifics
+- Constraints
+- Current state
+
+# Task
+Specific next step (not whole app)
+
+# Format
+How the answer should come back</pre>
+        </div>
+        <div>
+            <h3>Layer 3 — Add Examples + Reasoning</h3>
+            <pre># Examples
+- Acuity booking flow
+- Slack messaging UI
+
+# Process
+Before you write anything, think
+step-by-step about what could break.</pre>
+
+            <h3 style="margin-top: 6pt;">Layer 4 — XML Tags + Meta-Prompt</h3>
+            <pre>&lt;role&gt;...&lt;/role&gt;
+&lt;context&gt;...&lt;/context&gt;
+&lt;task&gt;...&lt;/task&gt;
+&lt;format&gt;...&lt;/format&gt;
+&lt;examples&gt;...&lt;/examples&gt;</pre>
+            <p style="font-size: 9pt;">Then: <em>"What's missing? Rewrite this prompt to get a better result."</em> Run the rewrite.</p>
+        </div>
+    </div>
+
+    <h2>Rescue Move — Interview Technique</h2>
+    <pre>I want to build [PROJECT]. Before we write anything,
+interview me about my project. Ask one question at a time.
+Wait for my answer. When you have enough, summarize back.</pre>
+
+    <h2>After V4 Works — 3 Next Moves</h2>
+    <ul>
+        <li><strong>Iterate one section</strong> — change only Context or Task, leave the rest</li>
+        <li><strong>Ask for variations</strong> — "Give me 3 different approaches. Compare trade-offs."</li>
+        <li><strong>Ask AI to critique itself</strong> — "What's wrong with what you just produced?"</li>
+    </ul>
+
+    <h2>Don't</h2>
+    <ul>
+        <li>Don't use "CRITICAL: YOU MUST..." — modern models get overcautious and refuse</li>
+        <li>Don't change 3 things at once when iterating — change one, test, then the next</li>
+        <li>Don't assume same prompt works in Claude and ChatGPT</li>
+    </ul>
+
+    <div class="footer">
+        [Deployed URL] &middot; TechTown Start Studio &middot; 2026-05-12
+    </div>
+</body>
+</html>
