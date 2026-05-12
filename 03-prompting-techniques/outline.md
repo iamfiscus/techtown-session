@@ -1,11 +1,14 @@
 # Speaker Outline — Prompting Techniques Workshop
 
-**Total time:** 45 min + 1–2 hr build time after
+**Total time:** ~47 min (45 + 2 added for concept slides) + 1–2 hr build time after
 **Audience:** ~250, fresh TechTown crowd, building with Lovable
+**Deck:** 28 slides total
 
 ---
 
 ## 0:00 — Title Slide
+
+**Slide:** 1
 
 **Say:** "Welcome. By the end of the next 45 minutes you'll have a prompt that's 4 layers better than the one you'd write today. And then you'll have time to actually use it in Lovable."
 
@@ -14,6 +17,8 @@
 ---
 
 ## 0:01 — Logistics
+
+**Slide:** 2
 
 **Say:** "Open ChatGPT or Claude.ai. Free is fine. Think of ONE project — the thing you'd build if Lovable just worked. No idea? Look for a red-shirt volunteer; they have starter cards. Or scan this QR."
 
@@ -27,15 +32,41 @@
 
 ## 0:03 — Mindset Shift
 
+**Slide:** 3
+
 **Say:** "Most people pray when they prompt. 'Build me Uber.' That's a wish. Today we're stacking. Each layer is something the AI can't guess about your business."
 
-**Cue:** Advance to Layer 1.
+**Cue:** Advance to the conversation-roles slide.
 
 ---
 
-## 0:05 — Layer 1: Write Your V1
+## 0:04 — How AI conversations work (NEW)
 
 **Slide:** 4
+
+**Say:** "Quick mental model before we start. Every chat with an AI has three roles. SYSTEM is the hidden setup — Lovable manages that for you. USER is what you type — that's where everything we do today lives. ASSISTANT is what comes back. When I say 'stack layers' I mean: pack more useful context into your USER message."
+
+**Cue:** Point to each of the 3 cards. Linger on USER. Advance.
+
+**Volunteer cue:** No action needed.
+
+---
+
+## 0:05 — Context Window (NEW)
+
+**Slide:** 5
+
+**Say:** "Second mental model: AI has a memory limit. It's called the context window. Each chat can only hold so much in mind. Long chats — stuff at the top starts slipping away. That's why R-C-T-F works: it packs the critical context up front. That's also why iteration works — fresh chat, focused attention. Practical tip: when output gets weird, start a NEW chat with your V4 prompt."
+
+**Cue:** Hold for 10 seconds. Then advance to Layer 1.
+
+**Volunteer cue:** No action needed.
+
+---
+
+## 0:06 — Layer 1: Write Your V1
+
+**Slide:** 6
 
 **Say:** "No rules yet. Don't overthink it. Just write what you'd actually type if no one was watching."
 
@@ -45,9 +76,9 @@
 
 ---
 
-## 0:08 — V1 Diagnosis
+## 0:09 — V1 Diagnosis
 
-**Slide:** 5
+**Slide:** 7
 
 **Say:** "Pencils down. Here's mine: 'build me a booking app for my salon.' I ran it. Got 800 lines of generic React. No business logic, no stylist names, nothing about how my salon actually works. Vague in, vague out."
 
@@ -57,9 +88,9 @@
 
 ---
 
-## 0:10 — The 4 Missing Things
+## 0:11 — The 4 Missing Things
 
-**Slide:** 6
+**Slide:** 8
 
 **Say:** "Show of hands — your V1 about that level?" *[pause for hands]* "Yeah. So the AI isn't dumb. It just doesn't know anything about your business. We're about to fix that in 4 moves."
 
@@ -69,9 +100,9 @@
 
 ---
 
-## 0:11 — Markdown Primer
+## 0:12 — Markdown Primer
 
-**Slides:** 7–8
+**Slides:** 9–10
 
 **Say:** "Quick detour. AI reads structure. If your prompt looks like a text message, you'll get a text message back. You need exactly four moves — I'll show you in 90 seconds."
 
@@ -85,9 +116,9 @@
 
 ---
 
-## 0:14 — Layer 2: R-C-T-F Framework
+## 0:15 — Layer 2: R-C-T-F Framework
 
-**Slide:** 9
+**Slide:** 11
 
 **Say:** "Now we have a framework. Role, Context, Task, Format. Each one is a markdown section. Role tells the AI who it is. Context gives it the business facts it can't guess. Task is the one thing you want done. Format is how you want it back."
 
@@ -101,9 +132,9 @@
 
 ---
 
-## 0:16 — V2 Live Demo
+## 0:17 — V2 Live Demo
 
-**Slide:** 10
+**Slide:** 12
 
 **Say:** "Okay, live. I'm pasting my salon V1 and rewriting it as R-C-T-F right now."
 
@@ -117,9 +148,9 @@
 
 ---
 
-## 0:19 — Audience V2 Upgrade
+## 0:20 — Audience V2 Upgrade
 
-**Slide:** 11
+**Slide:** 13
 
 **Say:** "Your turn. Three minutes. Rewrite your V1 as R-C-T-F. If you freeze on Context, ask yourself: what would a new employee need to know on day one? Write that."
 
@@ -129,9 +160,9 @@
 
 ---
 
-## 0:22 — V2 Share-Back
+## 0:23 — V2 Share-Back
 
-**Slide:** 12
+**Slide:** 14
 
 **Say:** "Pencils down. Show of hands — who's got something noticeably better than their V1?" *[pause]* "Good. We've got one coming up on screen."
 
@@ -141,9 +172,9 @@
 
 ---
 
-## 0:23 — Layer 3: Examples + Reasoning
+## 0:24 — Layer 3: Examples + Reasoning
 
-**Slide:** 13
+**Slide:** 15
 
 **Say:** "Layer 3 is two moves stacked. Few-Shot and Chain-of-Thought. Research shows few-shot examples improve accuracy 15 to 40 percent. That's a real number, not marketing. Examples teach the AI the shape of what you want. Step-by-step reasoning teaches it the process."
 
@@ -157,9 +188,9 @@
 
 ---
 
-## 0:26 — V3 Example
+## 0:27 — V3 Example
 
-**Slide:** 14
+**Slide:** 16
 
 **Say:** "Here's what those two sections look like dropped into the salon prompt. `# Examples` — Acuity, Square Appointments. `# Process` — before you write anything, think through what could break in the booking flow."
 
@@ -173,9 +204,9 @@
 
 ---
 
-## 0:28 — Audience V3 Upgrade
+## 0:29 — Audience V3 Upgrade
 
-**Slide:** 15
+**Slide:** 17
 
 **Say:** "Three more minutes. Add `# Examples` and `# Process` to your V2. Your examples don't have to be perfect — 'something like Acuity booking' is enough. Just give it a reference point."
 
@@ -185,9 +216,9 @@
 
 ---
 
-## 0:31 — V3 Share-Back
+## 0:32 — V3 Share-Back
 
-**Slide:** 16
+**Slide:** 18
 
 **Say:** "Pencils down. Show of hands — even better than V2?" *[pause for hands]* "One more up on screen."
 
@@ -197,25 +228,45 @@
 
 ---
 
-## 0:32 — Layer 4: XML Tags + Meta-Prompt
+## 0:33 — Why XML? (NEW)
 
-**Slide:** 17
+**Slide:** 19
 
-**Say:** "Last layer. Two pro moves. First: XML tags. Wrap your markdown sections in tags — `<role>`, `<context>`, `<task>`, `<format>`, `<examples>`. Claude in particular reads these as hard semantic boundaries. Less ambiguity, better output."
+**Say:** "Before we wrap your prompt — why XML at all? Models are trained on a ton of tagged content. HTML, XML, all of it. When the AI sees `<role>` and `<context>`, those tags act as hard boundaries: 'this is the role, that's the context.' Claude in particular is tuned for it. ChatGPT and Gemini parse it fine too — no downside. And the tag names? They don't have to be magic. Use whatever's clear to you: `<my_business>`, `<the_thing>`, whatever."
 
-**Cue:** Show the wrapped example on screen. Pause briefly.
+**Cue:** Read the bullets at a steady pace. The "tag names don't have to be magic" point is the unlock — let it land before advancing.
 
-**Say:** "Second move, and this one's my favorite: meta-prompting. Paste your prompt into the AI and say 'What's missing? Rewrite this prompt to get a better result.' Then run that rewritten version. You don't have to be the best prompt writer in the room. You just have to ask the AI to be one."
-
-**Cue:** Advance to live demo.
-
-**Volunteer cue:** No action needed. Get ready — this is the "whoa" moment; watch the room.
+**Volunteer cue:** No action needed.
 
 ---
 
-## 0:34 — V4 Live Demo (The "Whoa" Moment)
+## 0:34 — Layer 4: Wrap + Meta-Prompt
 
-**Slide:** 18
+**Slide:** 20
+
+**Say:** "Two moves stacked. First: wrap your V3 sections in tags. Second — and this one's my favorite — meta-prompt it. Paste your prompt into the AI and say 'What's missing? Rewrite this prompt to get a better result.' Then run THAT rewritten version. You don't have to be the best prompt writer in the room. You just have to ask the AI to be one."
+
+**Cue:** Point to the two-column slide as you describe each move. Advance.
+
+**Volunteer cue:** Get ready — this is the "whoa" moment; watch the room.
+
+---
+
+## 0:35 — Voice it. Then read it. (NEW)
+
+**Slide:** 21
+
+**Say:** "Quick aside — if typing isn't your thing, voice it. Open the voice mode in the ChatGPT or Claude app. Just talk out your messy thoughts — no structure needed. Then ask the AI: 'Turn what I just said into a R-C-T-F prompt with XML tags.' It will. And then — this is the actual skill — you READ what comes back. Edit it. Run it. Reading prompts is harder than writing them. The 4 layers we just learned? That's your reading checklist."
+
+**Cue:** Hold the slide for ~30 seconds. The "reading > writing" insight is the takeaway here — don't rush. Then advance to the live demo.
+
+**Volunteer cue:** No action needed.
+
+---
+
+## 0:36 — V4 Live Demo (The "Whoa" Moment)
+
+**Slide:** 22
 
 **Say:** "Live. I'm wrapping the V3 salon prompt in XML, then sending it to the AI and asking it to improve itself."
 
@@ -229,21 +280,21 @@
 
 ---
 
-## 0:37 — Audience V4 Upgrade
+## 0:39 — Audience V4 Upgrade
 
-**Slide:** 19
+**Slide:** 23
 
-**Say:** "Your turn. Three minutes. Wrap your V3 in XML, then meta-prompt it. Don't be precious about what comes back — let the AI rewrite your prompt. That's the move."
+**Say:** "Your turn. Three minutes. Wrap your V3 in XML, then meta-prompt it. Or — if you'd rather — open voice mode and try it that way. Don't be precious about what comes back — let the AI rewrite your prompt. That's the move."
 
 **Cue:** Start 3-minute timer. Hold slide.
 
-**Volunteer cue:** Float actively. This is the hardest step — some people will freeze on the XML syntax. Coaching script: "Just wrap each section in a tag that matches the header name." Show them on their screen if needed. One volunteer should be scouting for the best final example.
+**Volunteer cue:** Float actively. This is the hardest step — some people will freeze on the XML syntax. Coaching script: "Just wrap each section in a tag that matches the header name." Show them on their screen if needed. If someone wants to try voice, point them to the voice button in their app. One volunteer should be scouting for the best final example.
 
 ---
 
-## 0:40 — Final Share-Back
+## 0:42 — Final Share-Back
 
-**Slide:** 20
+**Slide:** 24
 
 **Say:** "Pencils down. Final show of hands — who's got a prompt that's noticeably better than what they walked in with?" *[pause for hands]* "That's the glow-up. One more on screen."
 
@@ -253,11 +304,11 @@
 
 ---
 
-## 0:41 — Cheat Sheet QR
+## 0:43 — Cheat Sheet QR
 
-**Slide:** 21
+**Slide:** 25
 
-**Say:** "You just stacked 4 layers. Everything you need — all four layer templates, the interview rescue, what to do after V4 works — it's on the cheat sheet. Scan that QR right now if you haven't already."
+**Say:** "You just stacked 4 layers. Everything you need — all four layer templates, the interview rescue, what to do after V4 works — it's on the cheat sheet. Scan that QR right now if you haven't already. The URL's also at the bottom of every slide if you missed it."
 
 **Cue:** Hold slide for 20 seconds. Let people scan. Then advance.
 
@@ -265,9 +316,9 @@
 
 ---
 
-## 0:42 — Interview Technique (5th Move)
+## 0:44 — Interview Technique (5th Move)
 
-**Slide:** 22
+**Slide:** 26
 
 **Say:** "One more move. This one's for when you get stuck during build. Lovable's doing something weird, you don't know what to ask for next — flip to the interview technique. Paste this into the AI: 'I want to build X. Before we write anything, interview me about my project. Ask one question at a time.' It'll ask you the questions. You just answer. That's how you unblock."
 
@@ -277,9 +328,9 @@
 
 ---
 
-## 0:43 — Bridge to Build
+## 0:45 — Bridge to Build
 
-**Slide:** 23
+**Slide:** 27
 
 **Say:** "Here's your first move when build time starts: paste your V4 into Lovable. That's it. Don't start fresh. Don't rewrite. Paste the thing you just built. Then iterate. We're all here."
 
@@ -289,9 +340,9 @@
 
 ---
 
-## 0:44 — Q&A / Closing Energy
+## 0:46 — Q&A / Closing Energy
 
-**Slide:** 24
+**Slide:** 28
 
 **Say:** "Any questions before we go?" *[take 1–2 questions max — if it's a build question, defer to build time]* "Alright. You've got V4, you've got the cheat sheet, you've got a room full of people to help you. Let's build."
 
@@ -307,14 +358,17 @@
 - Cut V3 audience prompt time to 2 min instead of 3
 - Skip the volunteer-surfaced example on V3 layer
 - Compress takeaway to 2 min
+- Skip the "Voice it" beat at 0:35 (it's a nice-to-have)
 
 **Running 5 min ahead:**
-- Add live interview-technique demo at 0:40 (audience watches AI interview JD)
+- Add live interview-technique demo at 0:42 (audience watches AI interview JD)
+- Demo the voice-input flow live at 0:35
 - Extend Q&A buffer
 
 **Audience is lost / slow:**
 - Skip V4 meta-prompt step, end at XML wrap
 - Tell them: "The cheat sheet has V4. Get V3 solid for build time."
+- Slide 5 (context window) can be cut if early beats are running long
 
 **Tech failure mid-demo:**
 - Use pre-prepared screenshots saved in `assets/` (capture day-of)

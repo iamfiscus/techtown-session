@@ -33,7 +33,10 @@
         h3 { font-size: 32px; font-weight: 500; margin-bottom: 16px; color: var(--accent); }
         p, li { font-size: 24px; line-height: 1.5; margin-bottom: 12px; }
         code, pre { font-family: 'Roboto Mono', monospace; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px; font-size: 20px; }
-        pre { padding: 20px; overflow-x: auto; white-space: pre-wrap; }
+        pre { padding: 20px; overflow-x: auto; white-space: pre-wrap; position: relative; }
+        .copy-btn { position: absolute; top: 8px; right: 8px; background: var(--accent); color: var(--dark); border: none; padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: 700; opacity: 0.85; font-family: 'Roboto', sans-serif; }
+        .copy-btn:hover { opacity: 1; }
+        .copy-btn.copied { background: #5cb85c; color: white; }
         .accent { color: var(--accent); }
         .nav { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
         .nav button { background: var(--accent); color: var(--dark); border: none; padding: 10px 16px; border-radius: 4px; cursor: pointer; font-weight: 700; }
@@ -48,6 +51,7 @@
                 <p style="margin-top: 60px; opacity: 0.8;">JD Fiscus &middot; TechTown Start Studio</p>
             </div>
             <div class="slide-footer">
+                <span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span>
                 <span>1 / 28</span>
             </div>
         </div>
@@ -63,7 +67,7 @@
                 </ul>
                 <p style="margin-top: 40px;"><span class="accent">After this 45 min → 1-2 hr build time.</span> This session is your prep.</p>
             </div>
-            <div class="slide-footer"><span>2 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>2 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="3">
@@ -85,7 +89,7 @@
                 </div>
                 <p style="margin-top: 40px;" class="accent">Today we stack 4 layers.</p>
             </div>
-            <div class="slide-footer"><span>3 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>3 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="4">
@@ -108,7 +112,7 @@
         </div>
         <p style="margin-top: 30px;" class="accent">Stacking layers = packing more useful context into your USER message.</p>
     </div>
-    <div class="slide-footer"><span>4 / 28</span></div>
+    <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>4 / 28</span></div>
 </div>
 
 <div class="slide" data-slide="5">
@@ -123,7 +127,7 @@
         </ul>
         <p style="margin-top: 30px;" class="accent">Tip: when output gets weird, start a NEW chat with your V4 prompt.</p>
     </div>
-    <div class="slide-footer"><span>5 / 28</span></div>
+    <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>5 / 28</span></div>
 </div>
 
         <div class="slide" data-slide="6">
@@ -134,7 +138,7 @@
                 <p style="margin-top: 40px; opacity: 0.7;">Be honest. Don't try to be clever. We're establishing baseline.</p>
                 <p style="margin-top: 60px;" class="accent">Type it. Run it. Watch what comes back.</p>
             </div>
-            <div class="slide-footer"><span>6 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>6 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="7">
@@ -148,7 +152,7 @@
 → AI says: "you didn't tell me"</pre>
                 <p style="margin-top: 40px;" class="accent">Vague in → vague out.</p>
             </div>
-            <div class="slide-footer"><span>7 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>7 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="8">
@@ -163,7 +167,7 @@
                 </ul>
                 <p style="margin-top: 40px;" class="accent">We're about to add all four. But first — one quick thing.</p>
             </div>
-            <div class="slide-footer"><span>8 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>8 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="9">
@@ -176,7 +180,7 @@
 ```code```          — exact text or code</pre>
                 <p style="margin-top: 30px;" class="accent">That's it. Don't overthink it.</p>
             </div>
-            <div class="slide-footer"><span>9 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>9 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="10">
@@ -202,7 +206,7 @@ Booking app for a solo salon
                 </div>
                 <p style="margin-top: 30px;" class="accent">Same content. Different output quality.</p>
             </div>
-            <div class="slide-footer"><span>10 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>10 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="11">
@@ -221,7 +225,7 @@ Design the booking flow data model.
 # Format
 Bullet list. Plain English. No code yet.</pre>
             </div>
-            <div class="slide-footer"><span>11 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>11 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="12">
@@ -231,7 +235,7 @@ Bullet list. Plain English. No code yet.</pre>
                 <p style="margin-top: 30px;">I rewrite my V1 as R-C-T-F.</p>
                 <p style="margin-top: 60px;" class="accent">Compare to V1 side-by-side.</p>
             </div>
-            <div class="slide-footer"><span>12 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>12 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="13">
@@ -242,7 +246,7 @@ Bullet list. Plain English. No code yet.</pre>
                 <p style="margin-top: 30px;">Stuck on Context? Ask yourself: <em>"What would a new employee need to know on day one?"</em></p>
                 <p style="margin-top: 60px;" class="accent">Type. Run. Compare to your V1.</p>
             </div>
-            <div class="slide-footer"><span>13 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>13 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="14">
@@ -251,7 +255,7 @@ Bullet list. Plain English. No code yet.</pre>
                 <h3 style="font-size: 56px;">Better than V1?</h3>
                 <p style="margin-top: 40px; opacity: 0.7;">Volunteers — surface one good example to the screen.</p>
             </div>
-            <div class="slide-footer"><span>14 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>14 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="15">
@@ -271,7 +275,7 @@ Bullet list. Plain English. No code yet.</pre>
                 </div>
                 <p style="margin-top: 40px;" class="accent">Examples teach SHAPE. Step-by-step teaches PROCESS. Stack them.</p>
             </div>
-            <div class="slide-footer"><span>15 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>15 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="16">
@@ -286,7 +290,7 @@ Before you write anything, think step-by-step about
 what could break in this booking flow.</pre>
                 <p style="margin-top: 30px;" class="accent">Add these to your V2. Don't replace anything.</p>
             </div>
-            <div class="slide-footer"><span>16 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>16 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="17">
@@ -297,7 +301,7 @@ what could break in this booking flow.</pre>
                 <p style="margin-top: 30px; opacity: 0.7;">Your examples don't have to be perfect. "Something like Acuity booking" is enough.</p>
                 <p style="margin-top: 60px;" class="accent">Type. Run. Compare to V2.</p>
             </div>
-            <div class="slide-footer"><span>17 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>17 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="18">
@@ -306,7 +310,7 @@ what could break in this booking flow.</pre>
                 <h3 style="font-size: 56px;">Even better?</h3>
                 <p style="margin-top: 40px; opacity: 0.7;">One volunteer-surfaced example.</p>
             </div>
-            <div class="slide-footer"><span>18 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>18 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="19">
@@ -321,7 +325,7 @@ what could break in this booking flow.</pre>
         </ul>
         <p style="margin-top: 30px;" class="accent">You can use &lt;role&gt;, &lt;my_business&gt;, &lt;the_thing&gt; — whatever's clear to you.</p>
     </div>
-    <div class="slide-footer"><span>19 / 28</span></div>
+    <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>19 / 28</span></div>
 </div>
 
 <div class="slide" data-slide="20">
@@ -344,7 +348,7 @@ to get a better result."</pre>
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>20 / 28</span></div>
+    <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>20 / 28</span></div>
 </div>
 
 <div class="slide" data-slide="21">
@@ -358,7 +362,7 @@ to get a better result."</pre>
         </ol>
         <p style="margin-top: 30px;" class="accent">Reading > writing. The 4 layers are your reading checklist.</p>
     </div>
-    <div class="slide-footer"><span>21 / 28</span></div>
+    <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>21 / 28</span></div>
 </div>
 
         <div class="slide" data-slide="22">
@@ -368,7 +372,7 @@ to get a better result."</pre>
                 <p style="margin-top: 30px;">Wrap V3 in XML → meta-prompt it → run the rewritten version.</p>
                 <p style="margin-top: 60px;" class="accent">Use the AI to be the best prompt writer in the room.</p>
             </div>
-            <div class="slide-footer"><span>22 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>22 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="23">
@@ -379,7 +383,7 @@ to get a better result."</pre>
                 <p style="margin-top: 30px; opacity: 0.7;">Don't be precious. Let the AI rewrite your prompt.</p>
                 <p style="margin-top: 60px;" class="accent">Wrap. Meta-prompt. Run the rewrite.</p>
             </div>
-            <div class="slide-footer"><span>23 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>23 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="24">
@@ -388,7 +392,7 @@ to get a better result."</pre>
                 <h3 style="font-size: 56px;">Final glow-up?</h3>
                 <p style="margin-top: 40px; opacity: 0.7;">Best volunteer-surfaced example.</p>
             </div>
-            <div class="slide-footer"><span>24 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>24 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="25">
@@ -398,7 +402,7 @@ to get a better result."</pre>
                 <img src="qr.png" alt="QR code to cheat sheet" style="width: 320px; height: 320px; margin: 30px auto; background: white; padding: 20px; border-radius: 10px;">
                 <p class="accent" style="font-size: 24px;">prompting-techniques.vercel.app</p>
             </div>
-            <div class="slide-footer"><span>25 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>25 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="26">
@@ -411,7 +415,7 @@ time. Wait for my answer. When you have enough,
 summarize back and we'll start.</pre>
                 <p style="margin-top: 30px;" class="accent">Full template on the cheat sheet.</p>
             </div>
-            <div class="slide-footer"><span>26 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>26 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="27">
@@ -421,7 +425,7 @@ summarize back and we'll start.</pre>
                 <p style="margin-top: 30px; font-size: 36px;" class="accent">Paste your V4 into Lovable.</p>
                 <p style="margin-top: 40px;">Then iterate. We're all here.</p>
             </div>
-            <div class="slide-footer"><span>27 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>27 / 28</span></div>
         </div>
 
         <div class="slide" data-slide="28">
@@ -430,7 +434,7 @@ summarize back and we'll start.</pre>
                 <p style="margin-top: 40px; font-size: 28px; opacity: 0.8;">Questions? I'm right here.</p>
                 <p style="margin-top: 60px; opacity: 0.6;">TechTown Start Studio &middot; JD Fiscus</p>
             </div>
-            <div class="slide-footer"><span>28 / 28</span></div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app</span><span>28 / 28</span></div>
         </div>
     </div>
     <div class="nav">
@@ -452,6 +456,25 @@ summarize back and we'll start.</pre>
             if (e.key === 'ArrowLeft') prev();
         });
         show(1);
+
+        // Copy-to-clipboard buttons on every <pre> block
+        document.querySelectorAll('pre').forEach(pre => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = 'copy';
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(pre.textContent).then(() => {
+                    btn.textContent = 'copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = 'copy';
+                        btn.classList.remove('copied');
+                    }, 1500);
+                });
+            };
+            pre.appendChild(btn);
+        });
     </script>
 </body>
 </html>
