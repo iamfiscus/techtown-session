@@ -98,6 +98,123 @@
             </div>
             <div class="slide-footer"><span>4 / 24</span></div>
         </div>
+
+        <div class="slide" data-slide="5">
+            <div class="slide-header"><h2>My V1: "build me a booking app for my salon"</h2></div>
+            <div class="slide-content">
+                <pre style="background: rgba(0,0,0,0.4);">→ 800 lines of generic React
+→ No business logic
+→ Generic booking UI
+→ Missing: cancellation policy, services, staff
+→ I say: "that's not what I wanted"
+→ AI says: "you didn't tell me"</pre>
+                <p style="margin-top: 40px;" class="accent">Vague in → vague out.</p>
+            </div>
+            <div class="slide-footer"><span>5 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="6">
+            <div class="slide-header"><h2>Your prompt is missing 4 things</h2></div>
+            <div class="slide-content">
+                <p>The AI can't guess:</p>
+                <ul style="margin-top: 30px;">
+                    <li><strong>Role</strong> — who it should act as</li>
+                    <li><strong>Context</strong> — what your business actually is</li>
+                    <li><strong>Task</strong> — the specific next step</li>
+                    <li><strong>Format</strong> — how the answer comes back</li>
+                </ul>
+                <p style="margin-top: 40px;" class="accent">We're about to add all four. But first — one quick thing.</p>
+            </div>
+            <div class="slide-footer"><span>6 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="7">
+            <div class="slide-header"><h2>Markdown in 90 seconds</h2></div>
+            <div class="slide-content">
+                <p>4 moves AI reads as structure:</p>
+                <pre style="margin-top: 30px;"># Header           — major section
+- bullet           — list of things
+**bold**           — emphasis on a key word
+```code```          — exact text or code</pre>
+                <p style="margin-top: 30px;" class="accent">That's it. Don't overthink it.</p>
+            </div>
+            <div class="slide-footer"><span>7 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="8">
+            <div class="slide-header"><h2>Why it matters</h2></div>
+            <div class="slide-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <h3>Without structure</h3>
+                        <pre style="font-size: 14px;">build a booking app for my salon
+the salon is solo i do hair
+i want online booking with a cancel policy</pre>
+                    </div>
+                    <div>
+                        <h3>With markdown</h3>
+                        <pre style="font-size: 14px;"># Project
+Booking app for a solo salon
+
+# Business
+- One stylist, hair only
+- Want public online booking
+- Need cancel policy</pre>
+                    </div>
+                </div>
+                <p style="margin-top: 30px;" class="accent">Same content. Different output quality.</p>
+            </div>
+            <div class="slide-footer"><span>8 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="9">
+            <div class="slide-header"><h2>Layer 2 — R-C-T-F</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 18px;"># Role
+You are a senior product engineer...
+
+# Context
+- Salon in Asheville, solo stylist
+- 20 clients/week, paper appointment book
+
+# Task
+Design the booking flow data model.
+
+# Format
+Bullet list. Plain English. No code yet.</pre>
+            </div>
+            <div class="slide-footer"><span>9 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="10">
+            <div class="slide-header"><h2>Watch this</h2></div>
+            <div class="slide-content" style="text-align: center;">
+                <h3 style="font-size: 48px;">Live demo</h3>
+                <p style="margin-top: 30px;">I rewrite my V1 as R-C-T-F.</p>
+                <p style="margin-top: 60px;" class="accent">Compare to V1 side-by-side.</p>
+            </div>
+            <div class="slide-footer"><span>10 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="11">
+            <div class="slide-header"><h2>Your turn — V2</h2></div>
+            <div class="slide-content">
+                <h3>Rewrite your V1 with R-C-T-F.</h3>
+                <p>Use markdown headers (#) for each section. 3 minutes.</p>
+                <p style="margin-top: 30px;">Stuck on Context? Ask yourself: <em>"What would a new employee need to know on day one?"</em></p>
+                <p style="margin-top: 60px;" class="accent">Type. Run. Compare to your V1.</p>
+            </div>
+            <div class="slide-footer"><span>11 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="12">
+            <div class="slide-header"><h2>Pencils down</h2></div>
+            <div class="slide-content" style="text-align: center;">
+                <h3 style="font-size: 56px;">Better than V1?</h3>
+                <p style="margin-top: 40px; opacity: 0.7;">Volunteers — surface one good example to the screen.</p>
+            </div>
+            <div class="slide-footer"><span>12 / 24</span></div>
+        </div>
     </div>
     <div class="nav">
         <button onclick="prev()">←</button>
