@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting Techniques — TechTown Workshop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c5449;
+            --accent: #ffcc33;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #0c5449, #25524a); color: white; min-height: 100vh; padding: 60px 20px; }
+        .container { max-width: 720px; margin: 0 auto; }
+        h1 { font-size: 48px; font-weight: 900; margin-bottom: 12px; }
+        h1 .accent { color: var(--accent); }
+        p.subtitle { font-size: 20px; opacity: 0.85; margin-bottom: 40px; }
+        .grid { display: grid; gap: 16px; margin-top: 24px; }
+        .card { background: rgba(0,0,0,0.25); padding: 20px 24px; border-radius: 10px; transition: background 0.2s; }
+        .card:hover { background: rgba(0,0,0,0.4); }
+        .card a { color: white; text-decoration: none; display: block; }
+        .card h3 { font-size: 22px; color: var(--accent); margin-bottom: 4px; }
+        .card p { font-size: 16px; opacity: 0.8; }
+        footer { margin-top: 60px; opacity: 0.6; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prompting <span class="accent">Techniques</span></h1>
+        <p class="subtitle">TechTown Start Studio workshop &middot; JD Fiscus</p>
+
+        <div class="grid">
+            <div class="card"><a href="./cheat-sheet.pdf">
+                <h3>Cheat Sheet (PDF)</h3>
+                <p>One-page reference. The 4 layers + interview rescue.</p>
+            </a></div>
+            <div class="card"><a href="./slides.html">
+                <h3>Workshop Slides</h3>
+                <p>The deck from the live session.</p>
+            </a></div>
+            <div class="card"><a href="./prompt-template.md">
+                <h3>V4 Prompt Template</h3>
+                <p>Copy-paste structure for your own projects.</p>
+            </a></div>
+            <div class="card"><a href="./interview-template.md">
+                <h3>Interview Rescue Template</h3>
+                <p>When you're stuck during build.</p>
+            </a></div>
+            <div class="card"><a href="./fallback-projects.md">
+                <h3>Starter Project Ideas</h3>
+                <p>Pick one if you don't have a project yet.</p>
+            </a></div>
+        </div>
+
+        <footer>
+            TechTown Start Studio &middot; 2026
+        </footer>
+    </div>
+</body>
+</html>
