@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting Techniques — TechTown Start Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c5449;
+            --accent: #ffcc33;
+            --secondary: #25524a;
+            --light: #f5f5f5;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #0c5449 0%, #25524a 100%);
+            --gradient-accent: linear-gradient(135deg, #ffcc33 0%, #f0b000 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #25524a 100%);
+            --radius: 10px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Roboto', sans-serif; background: var(--dark); overflow: hidden; }
+        .slides-container { width: 100%; height: 100%; position: relative; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; padding: 60px 80px; background: var(--gradient-primary); color: var(--white); opacity: 0; transition: opacity 0.4s ease; }
+        .slide.active { display: flex; opacity: 1; }
+        .slide-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .slide-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .slide-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; font-size: 14px; opacity: 0.7; }
+        h1 { font-size: 64px; font-weight: 900; margin-bottom: 24px; }
+        h2 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
+        h3 { font-size: 32px; font-weight: 500; margin-bottom: 16px; color: var(--accent); }
+        p, li { font-size: 24px; line-height: 1.5; margin-bottom: 12px; }
+        code, pre { font-family: 'Roboto Mono', monospace; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px; font-size: 20px; }
+        pre { padding: 20px; overflow-x: auto; white-space: pre-wrap; }
+        .accent { color: var(--accent); }
+        .nav { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .nav button { background: var(--accent); color: var(--dark); border: none; padding: 10px 16px; border-radius: 4px; cursor: pointer; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <div class="slide active" data-slide="1">
+            <div class="slide-content" style="justify-content: center; text-align: center;">
+                <h1>Stop Praying,<br><span class="accent">Start Stacking</span></h1>
+                <h3>4 Layers to a Lovable-Ready Prompt</h3>
+                <p style="margin-top: 60px; opacity: 0.8;">JD Fiscus &middot; TechTown Start Studio</p>
+            </div>
+            <div class="slide-footer">
+                <span>1 / 24</span>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="2">
+            <div class="slide-header"><h2>Before we start</h2></div>
+            <div class="slide-content">
+                <ul>
+                    <li>Open <strong>ChatGPT</strong> or <strong>Claude.ai</strong> (free is fine)</li>
+                    <li>Think of <strong>ONE project</strong> — "what I'd build if Lovable worked"</li>
+                    <li>No idea? Red-shirt volunteer has cards (or scan QR)</li>
+                    <li>Fall behind? <strong>Watch my screen.</strong> You'll still get everything.</li>
+                </ul>
+                <p style="margin-top: 40px;"><span class="accent">After this 45 min → 1-2 hr build time.</span> This session is your prep.</p>
+            </div>
+            <div class="slide-footer"><span>2 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="3">
+            <div class="slide-header"><h2>Outcome prompts = praying</h2></div>
+            <div class="slide-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                    <div>
+                        <h3>Outcome</h3>
+                        <p>"Build me Uber"</p>
+                        <p>"Make my app secure"</p>
+                        <p>"Add user auth"</p>
+                    </div>
+                    <div>
+                        <h3>Layered</h3>
+                        <p>Stack 4 things AI can't guess</p>
+                        <p>Role + Context + Task + Format</p>
+                        <p>Then examples, reasoning, structure</p>
+                    </div>
+                </div>
+                <p style="margin-top: 40px;" class="accent">Today we stack 4 layers.</p>
+            </div>
+            <div class="slide-footer"><span>3 / 24</span></div>
+        </div>
+
+        <div class="slide" data-slide="4">
+            <div class="slide-header"><h2>Layer 1 — Write your V1</h2></div>
+            <div class="slide-content">
+                <h3>Whatever you'd normally type.</h3>
+                <p>About your project. 60–90 seconds.</p>
+                <p style="margin-top: 40px; opacity: 0.7;">Be honest. Don't try to be clever. We're establishing baseline.</p>
+                <p style="margin-top: 60px;" class="accent">Type it. Run it. Watch what comes back.</p>
+            </div>
+            <div class="slide-footer"><span>4 / 24</span></div>
+        </div>
+    </div>
+    <div class="nav">
+        <button onclick="prev()">←</button>
+        <button onclick="next()">→</button>
+    </div>
+    <script>
+        let current = 1;
+        const total = document.querySelectorAll('.slide').length;
+        function show(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            const slide = document.querySelector(`[data-slide="${n}"]`);
+            if (slide) slide.classList.add('active');
+        }
+        function next() { if (current < total) { current++; show(current); } }
+        function prev() { if (current > 1) { current--; show(current); } }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') next();
+            if (e.key === 'ArrowLeft') prev();
+        });
+        show(1);
+    </script>
+</body>
+</html>
