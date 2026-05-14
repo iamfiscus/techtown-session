@@ -305,6 +305,109 @@ the rest of the page alone.</pre>
             <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>16 / 36</span></div>
         </div>
 
+        <div class="slide" data-slide="17">
+            <div class="slide-header"><h2>Module 3 — Data &amp; backends</h2></div>
+            <div class="slide-content">
+                <h3>The wall everyone hits.</h3>
+                <p style="margin-top: 20px;">Your app looks great — then you refresh the page and everything you typed is gone.</p>
+                <p style="margin-top: 40px;" class="accent">You need a backend. You don't need to understand one.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>17 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="18">
+            <div class="slide-header"><h2>What a backend actually is</h2></div>
+            <div class="slide-content">
+                <p>In plain terms:</p>
+                <h3 style="margin-top: 20px;">A place your app saves stuff so it's still there tomorrow.</h3>
+                <ul style="margin-top: 24px;">
+                    <li>The screen = what people see (the front)</li>
+                    <li>The backend = where the info lives (the back)</li>
+                    <li>No backend = nothing is remembered between visits</li>
+                </ul>
+                <p style="margin-top: 24px;" class="accent">You don't configure it. You ask for it.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>18 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="19">
+            <div class="slide-header"><h2>Meet Supabase</h2></div>
+            <div class="slide-content">
+                <p>Lovable has a built-in backend called <strong>Supabase</strong>.</p>
+                <ul style="margin-top: 24px;">
+                    <li>When Lovable says "Supabase" — that's your database talking</li>
+                    <li>You won't open it or set it up by hand</li>
+                    <li>You just say what you want saved, and Lovable wires it</li>
+                </ul>
+                <p style="margin-top: 24px;" class="accent">Recognize the word. That's all you need today.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>19 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="20">
+            <div class="slide-header"><h2>How to ask for it</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 25px; line-height: 1.7;">
+                    <li><strong>Saving data</strong> — "add a database so appointments are saved"</li>
+                    <li><strong>Accounts</strong> — "users can create an account and log in"</li>
+                    <li><strong>Forms that stick</strong> — "when someone submits this form, save it and show it on the dashboard"</li>
+                </ul>
+                <p style="margin-top: 20px;" class="accent">Describe the outcome in business terms. Lovable picks the tech.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>20 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="21">
+            <div class="slide-header"><h2>Copy-paste — backend request</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 18px;"># What to save
+[the thing — e.g. appointments, customers, orders]
+
+# Who can see it
+[just me / logged-in users / the public]
+
+# Where it shows up
+[which screen displays this saved data]
+
+Set up the database for this and connect it to
+the form and the screen. Use Supabase.</pre>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>21 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="22">
+            <div class="slide-header"><h2>Worked example — the salon app</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 18px;"># What to save
+Appointments — name, service, date, time
+
+# Who can see it
+Just me, the stylist — after I log in
+
+# Where it shows up
+A "Today's appointments" list on my dashboard
+
+Set up the database for this and connect it to
+the booking form and the dashboard. Use Supabase.</pre>
+                <p style="margin-top: 20px;" class="accent">Now the booking is still there tomorrow morning.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>22 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="23">
+            <div class="slide-header"><h2>Module 3 recap</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 26px; line-height: 1.7;">
+                    <li>Backend = where your app remembers things</li>
+                    <li>Supabase = Lovable's built-in one — just recognize the name</li>
+                    <li>Ask in business terms: what to save, who sees it, where it shows</li>
+                    <li>Lovable picks the tech — you describe the outcome</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">Press &#8801; Menu for the next module.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>23 / 36</span></div>
+        </div>
+
     </div>
     <button class="menu-btn" onclick="goto(1)">&#8801; Menu</button>
     <div class="nav">
