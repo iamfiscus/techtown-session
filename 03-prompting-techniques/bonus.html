@@ -501,6 +501,103 @@ form data model&lt;/task&gt;</pre>
             <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>29 / 36</span></div>
         </div>
 
+        <div class="slide" data-slide="30">
+            <div class="slide-header"><h2>Module 5 — More techniques</h2></div>
+            <div class="slide-content">
+                <h3>Four more moves for when you're ready.</h3>
+                <p style="margin-top: 20px;">You don't need these on day one. You'll want them by day three.</p>
+                <p style="margin-top: 40px;" class="accent">Chaining &middot; Constraints &middot; Self-critique &middot; "3 approaches"</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>30 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="31">
+            <div class="slide-header"><h2>1 — Prompt chaining</h2></div>
+            <div class="slide-content">
+                <p>Don't ask for the whole app in one mega-prompt. Build it in a chain:</p>
+                <pre style="font-size: 18px; margin-top: 20px;">Step 1 &rarr; "Design the data model. Just that."
+Step 2 &rarr; "Now build the booking screen for it."
+Step 3 &rarr; "Now add the confirmation email."</pre>
+                <p style="margin-top: 20px;" class="accent">Each step is small, checkable, and builds on the last.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>31 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="32">
+            <div class="slide-header"><h2>2 — Constraints</h2></div>
+            <div class="slide-content">
+                <p>Tell the AI what <em>not</em> to do. It loves to over-build.</p>
+                <pre style="font-size: 18px; margin-top: 20px;"># Constraints
+- Keep it simple — no features I didn't ask for
+- Don't add a login system yet
+- One screen only
+- If you're unsure, ask before building</pre>
+                <p style="margin-top: 20px;" class="accent">Constraints keep you in control of the scope.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>32 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="33">
+            <div class="slide-header"><h2>3 — Self-critique with a rubric</h2></div>
+            <div class="slide-content">
+                <p>Give the AI a checklist and make it grade its own work.</p>
+                <pre style="font-size: 18px; margin-top: 20px;">Before you show me the result, check it against:
+- Does it match my business context?
+- Is anything generic that should be specific?
+- What did I forget to ask for?
+
+Fix what fails, then show me.</pre>
+                <p style="margin-top: 20px;" class="accent">The AI is a better critic than a first-drafter. Use that.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>33 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="34">
+            <div class="slide-header"><h2>4 — "Give me 3 approaches"</h2></div>
+            <div class="slide-content">
+                <p>Before committing to a build, ask for options.</p>
+                <pre style="font-size: 18px; margin-top: 20px;">Don't build yet. Give me 3 ways to approach this,
+with a one-line tradeoff for each. I'll pick one.</pre>
+                <ul style="margin-top: 20px;">
+                    <li>You see choices you didn't know you had</li>
+                    <li>You learn the tradeoffs without building all three</li>
+                </ul>
+                <p style="margin-top: 16px;" class="accent">Cheap to ask. Expensive to skip.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>34 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="35">
+            <div class="slide-header"><h2>Copy-paste — all four</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 16px;">CHAIN:    "Just do step 1. We'll go one step at a time."
+
+LIMIT:    "Keep it simple. No features I didn't ask for.
+           Ask before adding anything extra."
+
+CRITIQUE: "Check your result against my context and
+           fix what's generic before showing me."
+
+OPTIONS:  "Don't build yet — give me 3 approaches
+           with tradeoffs. I'll pick one."</pre>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>35 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="36">
+            <div class="slide-header"><h2>Module 5 recap</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 26px; line-height: 1.7;">
+                    <li><strong>Chain</strong> — build big things one small step at a time</li>
+                    <li><strong>Constrain</strong> — tell it what not to do</li>
+                    <li><strong>Critique</strong> — make it grade its own work</li>
+                    <li><strong>Options</strong> — get 3 approaches before committing</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">Press &#8801; Menu — that's all five modules.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>36 / 36</span></div>
+        </div>
+
     </div>
     <button class="menu-btn" onclick="goto(1)">&#8801; Menu</button>
     <div class="nav">
