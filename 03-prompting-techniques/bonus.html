@@ -81,6 +81,120 @@
             <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>1 / 36</span></div>
         </div>
 
+        <div class="slide" data-slide="2">
+            <div class="slide-header"><h2>Module 1 — When the build breaks</h2></div>
+            <div class="slide-content">
+                <h3>Lovable did something weird. Now what?</h3>
+                <p style="margin-top: 20px;">Everyone hits this. The screen's blank, the button does nothing, it deleted the thing you liked.</p>
+                <p style="margin-top: 40px;" class="accent">You don't need to know how to code. You need to know how to diagnose.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>2 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="3">
+            <div class="slide-header"><h2>Don't rage-prompt. Diagnose.</h2></div>
+            <div class="slide-content">
+                <p>When something breaks, the instinct is to type "it's broken, fix it" over and over.</p>
+                <ul style="margin-top: 30px;">
+                    <li>The AI isn't broken — it's <strong>missing information</strong></li>
+                    <li>Same lesson as V1: vague in &rarr; vague out</li>
+                    <li>"Fix it" is a wish. Describe what you see — that's a clue.</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">A good bug report is just Context + Task, aimed at a problem.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>3 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="4">
+            <div class="slide-header"><h2>Describe a bug in 3 parts</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 26px; line-height: 1.7;">
+                    <li><strong>Expected</strong> — what you thought would happen</li>
+                    <li><strong>Actual</strong> — what happened instead</li>
+                    <li><strong>On screen</strong> — what you literally see (error text, blank area, wrong color)</li>
+                </ul>
+                <p style="margin-top: 30px; opacity: 0.7;">If there's an error message, paste the whole thing. Don't summarize it.</p>
+                <p style="margin-top: 20px;" class="accent">Specifics are clues. "It's broken" is not.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>4 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="5">
+            <div class="slide-header"><h2>Copy-paste — bug report</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 18px;">Something isn't working. Here's what I see:
+
+# Expected
+[what I thought would happen]
+
+# Actual
+[what happened instead]
+
+# On screen
+[error text, or describe what's wrong]
+
+Before changing anything, tell me the 2-3 most
+likely causes. Then fix the most likely one.</pre>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>5 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="6">
+            <div class="slide-header"><h2>Still stuck? Flip it — the interview</h2></div>
+            <div class="slide-content">
+                <p>When you don't even know what to ask for, make the AI ask <em>you</em>.</p>
+                <ul style="margin-top: 24px;">
+                    <li>You stop guessing at prompt wording</li>
+                    <li>The AI pulls the context out of you, one question at a time</li>
+                    <li>You just answer — answering is easier than prompting</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">This is the 5th move from the core deck — here's the full template.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>6 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="7">
+            <div class="slide-header"><h2>Copy-paste — the interview</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 18px;">I want to build [PROJECT]. Before we write anything,
+interview me about my project. Ask one question at a
+time. Wait for my answer before the next question.
+When you have enough to write a clear spec, summarize
+it back to me and we'll start.</pre>
+                <p style="margin-top: 24px;" class="accent">Answer honestly. The summary it gives back is your new prompt.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>7 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="8">
+            <div class="slide-header"><h2>When to start a fresh chat</h2></div>
+            <div class="slide-content">
+                <p>Remember the context window — long chats lose the thread.</p>
+                <h3 style="margin-top: 24px;">Signs the chat has gone bad:</h3>
+                <ul>
+                    <li>It re-introduces bugs you already fixed</li>
+                    <li>It forgets decisions you made earlier</li>
+                    <li>Answers get slower and vaguer</li>
+                </ul>
+                <p style="margin-top: 24px;" class="accent">Fix: new chat. Paste your V4 prompt + a 3-line summary of where you are.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>8 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="9">
+            <div class="slide-header"><h2>Module 1 recap</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 26px; line-height: 1.7;">
+                    <li>Don't rage-prompt — diagnose</li>
+                    <li>Describe bugs: Expected / Actual / On screen</li>
+                    <li>Stuck for words? Make the AI interview you</li>
+                    <li>Chat gone bad? Fresh chat + V4 + a summary</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">Press &#8801; Menu for the next module.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>9 / 36</span></div>
+        </div>
+
     </div>
     <button class="menu-btn" onclick="goto(1)">&#8801; Menu</button>
     <div class="nav">
