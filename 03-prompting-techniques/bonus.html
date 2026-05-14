@@ -108,12 +108,13 @@
 
         // Copy-to-clipboard buttons on every <pre> block
         document.querySelectorAll('pre').forEach(pre => {
+            const text = pre.textContent;
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
             btn.textContent = 'copy';
             btn.onclick = (e) => {
                 e.stopPropagation();
-                navigator.clipboard.writeText(pre.textContent).then(() => {
+                navigator.clipboard.writeText(text).then(() => {
                     btn.textContent = 'copied!';
                     btn.classList.add('copied');
                     setTimeout(() => {
