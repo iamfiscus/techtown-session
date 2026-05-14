@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Modules — Prompting Techniques — TechTown Start Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c5449;
+            --accent: #ffcc33;
+            --secondary: #25524a;
+            --light: #f5f5f5;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #0c5449 0%, #25524a 100%);
+            --gradient-accent: linear-gradient(135deg, #ffcc33 0%, #f0b000 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #25524a 100%);
+            --radius: 10px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Roboto', sans-serif; background: var(--dark); overflow: hidden; }
+        .slides-container { width: 100%; height: 100%; position: relative; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; padding: 60px 80px; background: var(--gradient-primary); color: var(--white); opacity: 0; transition: opacity 0.4s ease; }
+        .slide.active { display: flex; opacity: 1; }
+        .slide-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .slide-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .slide-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; font-size: 14px; opacity: 0.7; }
+        h1 { font-size: 64px; font-weight: 900; margin-bottom: 24px; }
+        h2 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
+        h3 { font-size: 32px; font-weight: 500; margin-bottom: 16px; color: var(--accent); }
+        p, li { font-size: 24px; line-height: 1.5; margin-bottom: 12px; }
+        code, pre { font-family: 'Roboto Mono', monospace; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px; font-size: 20px; }
+        pre { padding: 20px; overflow-x: auto; white-space: pre-wrap; position: relative; }
+        .copy-btn { position: absolute; top: 8px; right: 8px; background: var(--accent); color: var(--dark); border: none; padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: 700; opacity: 0.85; font-family: 'Roboto', sans-serif; }
+        .copy-btn:hover { opacity: 1; }
+        .copy-btn.copied { background: #5cb85c; color: white; }
+        .accent { color: var(--accent); }
+        .nav { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .nav button { background: var(--accent); color: var(--dark); border: none; padding: 10px 16px; border-radius: 4px; cursor: pointer; font-weight: 700; }
+        .menu-btn { position: fixed; top: 20px; left: 20px; background: var(--accent); color: var(--dark); border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: 700; font-family: 'Roboto', sans-serif; z-index: 100; }
+        .menu-btn:hover { opacity: 0.85; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .menu-card { background: rgba(0,0,0,0.3); padding: 20px 24px; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+        .menu-card:hover { background: rgba(255,204,51,0.15); transform: translateY(-2px); }
+        .menu-card h3 { margin-bottom: 6px; font-size: 26px; }
+        .menu-card p { font-size: 18px; opacity: 0.8; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <div class="slide active" data-slide="1">
+            <div class="slide-header"><h2>Bonus modules — pick one</h2></div>
+            <div class="slide-content">
+                <p style="opacity: 0.8; margin-bottom: 20px;">Optional deep-dives. Click one, or use the arrow keys.</p>
+                <div class="menu-grid">
+                    <div class="menu-card" onclick="goto(2)">
+                        <h3>1 — When the build breaks</h3>
+                        <p>Debugging. Describing bugs. The interview technique, in full.</p>
+                    </div>
+                    <div class="menu-card" onclick="goto(10)">
+                        <h3>2 — After V4 works</h3>
+                        <p>Iterating safely. Variations. Design tweaks.</p>
+                    </div>
+                    <div class="menu-card" onclick="goto(17)">
+                        <h3>3 — Data &amp; backends</h3>
+                        <p>The database wall, in plain language.</p>
+                    </div>
+                    <div class="menu-card" onclick="goto(24)">
+                        <h3>4 — Reading prompts well</h3>
+                        <p>Vetting an AI-written prompt. The 4 layers as a checklist.</p>
+                    </div>
+                    <div class="menu-card" onclick="goto(30)">
+                        <h3>5 — More techniques</h3>
+                        <p>Chaining, constraints, self-critique, "give me 3 approaches."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>1 / 36</span></div>
+        </div>
+
+    </div>
+    <button class="menu-btn" onclick="goto(1)">&#8801; Menu</button>
+    <div class="nav">
+        <button onclick="prev()">&larr;</button>
+        <button onclick="next()">&rarr;</button>
+    </div>
+    <script>
+        let current = 1;
+        const total = document.querySelectorAll('.slide').length;
+        const menuBtn = document.querySelector('.menu-btn');
+        function show(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            const slide = document.querySelector(`[data-slide="${n}"]`);
+            if (slide) slide.classList.add('active');
+            menuBtn.style.display = (n === 1) ? 'none' : 'block';
+        }
+        function goto(n) { current = n; show(current); }
+        function next() { if (current < total) { current++; show(current); } }
+        function prev() { if (current > 1) { current--; show(current); } }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') next();
+            if (e.key === 'ArrowLeft') prev();
+        });
+        show(1);
+
+        // Copy-to-clipboard buttons on every <pre> block
+        document.querySelectorAll('pre').forEach(pre => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = 'copy';
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(pre.textContent).then(() => {
+                    btn.textContent = 'copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = 'copy';
+                        btn.classList.remove('copied');
+                    }, 1500);
+                });
+            };
+            pre.appendChild(btn);
+        });
+    </script>
+</body>
+</html>
