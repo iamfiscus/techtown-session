@@ -195,6 +195,116 @@ it back to me and we'll start.</pre>
             <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>9 / 36</span></div>
         </div>
 
+        <div class="slide" data-slide="10">
+            <div class="slide-header"><h2>Module 2 — After V4 works</h2></div>
+            <div class="slide-content">
+                <h3>It works. Don't break it.</h3>
+                <p style="margin-top: 20px;">You've got something real on screen. Now you're scared to touch it.</p>
+                <p style="margin-top: 40px;" class="accent">Iterating is a skill. It's not "ask for everything at once."</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>10 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="11">
+            <div class="slide-header"><h2>Small, reversible changes</h2></div>
+            <div class="slide-content">
+                <ul style="margin-top: 10px;">
+                    <li><strong>One thing at a time</strong> — so you know what caused what</li>
+                    <li><strong>Reversible</strong> — you can always say "undo that last change"</li>
+                    <li><strong>Name what's working</strong> — tell it what NOT to touch</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">Big-bang changes are how working apps get broken.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>11 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="12">
+            <div class="slide-header"><h2>Three ways to move forward</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 26px; line-height: 1.7;">
+                    <li><strong>Change one section</strong> — "only change the booking form, leave the rest"</li>
+                    <li><strong>Layer one feature</strong> — add features one prompt at a time, not a list of ten</li>
+                    <li><strong>Ask for variations</strong> — "give me 3 versions of this screen, then I'll pick"</li>
+                </ul>
+                <p style="margin-top: 24px;" class="accent">Each prompt = one move.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>12 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="13">
+            <div class="slide-header"><h2>Copy-paste — change one thing</h2></div>
+            <div class="slide-content">
+                <pre style="font-size: 18px;"># Change
+[the one thing to change]
+
+# Leave alone
+Everything else is working — don't touch it.
+
+# Check
+After the change, tell me what you modified
+and confirm nothing else moved.</pre>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>13 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="14">
+            <div class="slide-header"><h2>Changing how it looks</h2></div>
+            <div class="slide-content">
+                <p>Design feedback works when you describe a <em>vibe</em>, not a hex code.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 24px;">
+                    <div>
+                        <h3>Vague</h3>
+                        <p>"Make it look better"</p>
+                        <p>"Nicer colors"</p>
+                    </div>
+                    <div>
+                        <h3>A vibe it can use</h3>
+                        <p>"More premium and calm — like a high-end spa"</p>
+                        <p>"More trustworthy, less playful"</p>
+                    </div>
+                </div>
+                <p style="margin-top: 24px;" class="accent">Name a feeling and a reference. It'll translate that to design.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>14 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="15">
+            <div class="slide-header"><h2>Worked example — the salon app</h2></div>
+            <div class="slide-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <h3>Done badly</h3>
+                        <pre style="font-size: 15px;">make it better and add
+the stuff a salon needs</pre>
+                        <p style="font-size: 18px; opacity: 0.7;">Vague. It'll rewrite half the app.</p>
+                    </div>
+                    <div>
+                        <h3>Done well</h3>
+                        <pre style="font-size: 15px;">Add a cancellation policy
+section to the booking page
+only. 24-hour notice. Leave
+the rest of the page alone.</pre>
+                        <p style="font-size: 18px; opacity: 0.7;">One change. Scoped. Safe.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>15 / 36</span></div>
+        </div>
+
+        <div class="slide" data-slide="16">
+            <div class="slide-header"><h2>Module 2 recap</h2></div>
+            <div class="slide-content">
+                <ul style="font-size: 26px; line-height: 1.7;">
+                    <li>One change per prompt — scoped and reversible</li>
+                    <li>Tell it what to leave alone</li>
+                    <li>Ask for variations before committing</li>
+                    <li>Design feedback = a vibe + a reference, not "better"</li>
+                </ul>
+                <p style="margin-top: 30px;" class="accent">Press &#8801; Menu for the next module.</p>
+            </div>
+            <div class="slide-footer"><span style="font-size: 13px; opacity: 0.6;">prompting-techniques.vercel.app/bonus</span><span>16 / 36</span></div>
+        </div>
+
     </div>
     <button class="menu-btn" onclick="goto(1)">&#8801; Menu</button>
     <div class="nav">
